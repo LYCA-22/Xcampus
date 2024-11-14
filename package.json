@@ -17,6 +17,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.2",
+    "env-cmd": "^10.1.0",
     "fetch": "^1.1.0",
     "puppeteer": "^23.3.0",
     "react": "^18.3.1",
