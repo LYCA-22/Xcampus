@@ -1,0 +1,876 @@
+/** 適用登入頁面與帳號管理中心 **/
+/** input設定 **/
+input{
+    border-radius: 10px;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    -webkit-font-family: NotoSansTC;
+    font-family: NotoSansTC;
+    -webkit-font-weight: 400;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-top: 25px;
+}
+input:focus{
+    outline: none;
+    background-color: #ececec;
+}
+.label{
+    display: inline-block;
+    font-size: 14px;
+}
+.select-input{
+    width: 100%;
+    padding-top: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    -webkit-font-family: NotoSansTC;
+    font-family: NotoSansTC;
+    -webkit-font-weight: 500;
+    font-weight: 400;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    z-index: 2;
+    color: #1c1c1c;
+}
+.select-input:active, .select-input:focus{
+    outline: none;
+}
+.arrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    right: 0px;
+    padding-right: 5px;
+}
+.inputbox{
+    display: flex;
+    background-color: #ececec;
+    margin: 10px;
+    border-radius: 12px;
+    height: 60px;
+    position: relative;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+.inputbox:hover{
+    background-color: #dbdadad3;
+}
+.label.normal{
+    position: absolute;
+    left: 20px;
+    top: 32%;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    font-size: 15px;
+    color: #1c1c1c;
+    transition: top 0.1s ease-in-out, left 0.1s ease-in-out, font-size 0.1s ease-in-out;
+}
+.label.active{
+    color: #0365c6;
+    position: absolute;
+    left: 10px;
+    top: 15%;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    font-size: 12px;
+    transition: top 0.1s ease-in-out, left 0.1s ease-in-out, font-size 0.1s ease-in-out;
+}
+.line{
+    width: 0px;
+    height: 0px;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+.line.active{
+    width: 100%;
+    height: 2px;
+    background-color: #0365c6;
+    position: absolute;
+    bottom: 0px;
+    border-radius: 100px;
+    z-index: 2;
+    display: block;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+/** 登入頁面 **/
+.loginpage-applogo{
+    margin: 10px;
+    margin-top: 0px;
+    height: 45px;
+    width: 45px;
+}
+.loginbox{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-image: url('/src/pages/assets/login_image.jpg');
+    background-size: cover;
+    position: relative;
+}
+.loginform{
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    position: absolute;
+    background-color: white;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+@media (min-width:100px) {
+    .loginform{
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        width: 100%;
+        box-sizing: border-box;
+        bottom: 0px;
+    }
+}
+@media (min-width:500px) {
+    .loginform{
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        bottom: 0px;
+        width: 70%;
+    }
+}
+@media (min-width:800px) {
+    .loginform{
+        height: 100%;
+        border-radius: 0px;
+        padding-left: 70px;
+        padding-right: 70px;
+        width: 500px;
+        right: 0px;
+    }
+}
+.formtitle{
+    font-family: NotoSansTC;
+    font-weight: 600;
+    margin: 10px;
+    font-size: 30px;
+}
+@media (min-width:100px) {
+    .formtitle{
+        font-size: 22px;
+    }
+}
+@media (min-width:700px) {
+    .formtitle{
+        font-size: 28px;
+    }
+}
+.login-btnbox{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    margin-top: 10px;
+}
+.loginpagebtn{
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid #dfdfdf;
+    padding: 10px;
+    color: #1c1c1c;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    font-size: 15px;
+    width: 48%;
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.loginpagebtn:hover{
+    background-color: #dfdfdf4c;
+}
+.loginpagebtn:active{
+    transform: scale(0.95);
+    background-color: #dfdfdf;
+}
+.loginpagebtn:disabled{
+    background-color: #dfdfdfc0;
+    color: #cecece;
+    cursor: not-allowed;
+}
+#toproposalbtn{
+    width: 100%;
+    margin-top: 15px;
+    padding: 0px;
+}
+#toproposalbtn a{
+    width: 100%;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/** 載入狀態 **/
+.loadingbox.hidden{
+    display: none;
+}
+.loadingbox.fadeIn{
+    display: flex;
+    opacity: 0;
+}
+.loadingbox.show{
+    display: flex;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+}
+.loadingbox{
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
+    background-color: #46464687;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    transition: opacity 0.2s ease-in-out;
+}
+.mainbox.fade{
+    transform: scale(0.8);
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+.mainbox.show{
+    transform: scale(1);
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+.mainbox{
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out;
+}
+.mainbox h3{
+    margin: 15px;
+    margin-top: 0px;
+}
+.gif{
+    height: 60px;
+    width: 60px;
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+/** 帳號管理中心頁面 **/
+.formtitle{
+    margin: 25px;
+    font-size: 24px;
+    color: #000;
+}
+.mcbox{
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    background-color: #ececec66;
+}
+.mcform{
+    display: flex;
+    position: relative;
+    padding: 15px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    margin: 10px;
+    background-color: white;
+}
+#se_mcbox{
+    margin-top: 20px;
+}
+@media (min-width:100px) {
+    .mcbox{
+        padding: 30px;
+    }
+    .mcform{
+        flex-direction: column;
+    }
+}
+@media (min-width:900px) {
+    .mcbox{
+        padding: 20px;
+        padding-bottom: 100px;
+    }
+    .mcform{
+        flex-direction: row;
+    }
+}
+.acc_formtitle{
+    margin: 25px;
+    font-size: 20px;
+    width: 100%;
+    color: #989898;
+}
+.acc_top_formtitle{
+    font-size: 32px;
+    font-weight: 600;
+    width: 100%;
+    color: #000;
+    margin: 0px;
+    margin: 10px;
+}
+.acc_top_formtext{
+    margin: 0px;
+    width: 100%;
+    color: #535353;
+}
+.acc_nav_formtext{
+    font-weight: 500;
+    margin: 10px;
+    margin-left: 35px;
+    width: 100%;
+    color: #535353;
+}
+
+.acc_NavBar{
+    margin-right: 20px;
+    padding: 15px;
+    padding-right: 25px;
+    width: 250px;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+}
+@media (min-width:100px) {
+    .acc_NavBar{
+        display: none;
+    }
+}
+@media (min-width:730px) {
+    .acc_NavBar{
+        display: flex;
+    }
+}
+.acc_navtext{
+    font-size: 15px;
+    margin: 0px;
+    margin-right: auto;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    color: #757575;
+    margin-left: 10px;
+}
+.acc_navbtn{
+    margin: 10px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    padding: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100%;
+    text-decoration: none;
+    color: #4d4d4d;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    box-sizing: border-box;
+    border-radius: 16px;
+    align-items: center;
+    display: flex;
+}
+.acc_navbtn svg{
+    margin-right: 10px;
+}
+.acc_navbtn:hover{
+    background-color: #e8e8e853;
+}
+.acc_navbtn.active{
+    font-weight: 600;
+    color: #000;
+}
+.acc_phone_nav{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 30;
+    background-color: white;
+    padding: 5px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    padding-bottom: 0px;
+}
+@media (min-width:100px) {
+    .acc_phone_nav{
+        display: flex;
+    }
+}
+@media (min-width:730px) {
+    .acc_phone_nav{
+        display: none;
+    }
+}
+.acc_p_navbtn{
+    text-decoration: none;
+    padding: 10px;
+    color: #a1a1a1;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.acc_p_navbtn.active{
+    border-bottom: 3px solid #1884f0;
+    color: #000;
+}
+.contentbox{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+@media (min-width:100px) {
+    .contentbox{
+        margin-top: 30px;
+    }
+}
+@media (min-width:730px) {
+    .contentbox{
+        margin-top: 0px;
+    }
+}
+.userCard{
+    background-image: linear-gradient(30deg, white, #eeeeeec3);
+    display: flex;
+    border-radius: 15px;
+    box-shadow: 0px 0px 4px 1px #dededea5;
+    margin: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+.userCard::before{
+    content: '';
+    height: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    width: 100%;
+    background-image: linear-gradient(to right, #1666e6, rgb(209, 146, 201));
+    position: absolute;
+    top: 0;
+}
+
+.userInformation{
+    display: inline-flex;
+    flex-direction: column;
+    margin: 20px;
+    box-sizing: border-box;
+}
+@media (min-width:100px) {
+    .userName{
+        font-size: 18px;
+        margin-top: 0px;
+    }
+    .userText{
+        font-family: NotoSansTC;
+        font-weight: 500;
+        font-size: 14px;
+        margin: 0px;
+    }
+    .userCard{
+        padding: 10px;
+        padding-top: 25px;
+    }
+}
+@media (min-width:730px) {
+    .userName{
+        font-size: 24px;
+        margin-top: 0px;
+    }
+    .userText{
+        font-family: NotoSansTC;
+        font-weight: 500;
+        font-size: 18px;
+        margin: 0px;
+    }
+    .userCard{
+        padding: 30px;
+        padding-top: 45px;
+    }
+}
+/** 基本資料介面 **/
+.list-userIn{
+    width: 100%;
+    position: relative;
+    border-top: 1.5px solid #e2e2e2;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.lu-title{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    color: #000;
+    margin: 0px;
+    font-size: 18px;
+    margin-right: auto;
+}
+.lu-fc{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.lu_p{
+    margin: 0px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    color: #757575;
+    font-size: 14px;
+}
+#list-userIn-name{
+    border: none;
+}
+.list-btn{
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    position: relative;
+    padding: 5px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    text-decoration: none;
+}
+.list-btn-line{
+    height: 1.5px;
+    background-color: #ececec;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.list-btn:hover{
+    background-color: #f6f6f6;
+}
+.lb-fc{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.lb-title{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    color: #000;
+    margin: 0px;
+    font-size: 16px;
+    margin-right: auto;
+}
+.se_libtn_textbox{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+.lb-p{
+    margin: 0px;
+    margin-right: auto;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    color: #757575;
+    font-size: 14px;
+}
+.lb-fc svg{
+   margin: 10px;
+   margin-left: 0px;
+}
+.cpw-pagebtn{
+    margin: 15px;
+}
+.changebtn{
+    margin-left: auto;
+    padding: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 100px;
+    border: 0px;
+    background-color: #1884f0;
+    color: white;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    font-size: 14px;
+}
+.changebtn:hover{
+    background-color: #0365c6;
+}
+.changebtn:disabled{
+    background-color: #eeeeee;
+    color: #cecece;
+    cursor: not-allowed;
+}
+.updatebtn{
+    margin-left: 10px;
+    padding: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 100px;
+    border: 0px;
+    background-color: #f018af;
+    color: white;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    font-size: 14px;
+}
+.updatebtn:hover{
+    background-color: #bb1589;
+}
+.acc_alertText{
+    color: #606060;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    font-size: 13px;
+    margin: 0px;
+    margin-right: auto;
+}
+/** 帳號圖片 **/
+.userPhotoBox{
+    margin: 10px;
+}
+.userimg{
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+@media (min-width:100px) {
+    .userimg{
+        width: 120px;
+        height: 120px;
+    }
+    .changephotobtn{
+        font-size: 12px;
+    }
+}
+@media (min-width:730px) {
+    .userimg{
+        width: 150px;
+        height: 150px;
+    }
+    .changephotobtn{
+        font-size: 14px;
+    }
+}
+.input-files{
+    display: none;
+}
+.changefilesbox{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.changephotobtn{
+    background-color: rgba(255, 255, 255, 0.835);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: NotoSansTC;
+
+    font-weight: 500;
+    width: 60px;
+    position: absolute;
+    bottom: 15px;
+    box-shadow: 0px 0px 10px 2px #5a5a5a6c;
+}
+.changephotobtn:hover{
+    background-color: #ffffff;
+}
+.updatephotobtn{
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 100px;
+    display: flex;
+    margin-top: 20px;
+    background-color: #1884f0;
+    font-size: 14px;
+    color: white;
+    border: 0px;
+}
+.updatephotobtn:hover{
+    background-color: #dedede;
+    color: #000;
+}
+
+/** 更新密碼頁面 **/
+.changepassword_form{
+    display: flex;
+    position: relative;
+    padding: 10px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    margin: 10px;
+    background-color: white;
+    margin-top: 20px;
+}
+.backbtn{
+    width: 100%;
+    margin: 15px;
+    margin-bottom: 0px;
+}
+
+
+/** 按鈕設定 **/
+.mcbtn{
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+    justify-items: center ;
+    border-radius: 10px ;
+    background-color: transparent ;
+    border: 2px solid #dfdfdf ;
+    padding: 10px ;
+    color: #1c1c1c;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    font-size: 15px;
+    width: 100%;
+    margin: 10px;
+    height: 45px;
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out, transform 0.2s ease-in-out;
+    box-shadow: none;
+}
+.mcbtn:hover{
+    background-color: #dfdfdf4c; /** #dfdfdf4c **/
+}
+.mcbtn:active{
+    /** transform: scale(0.95); **/
+    background-color: #dfdfdf4c;
+}
+.mcbtn:disabled{
+    background-color: #dfdfdfc0;
+    color: #cecece;
+    cursor: not-allowed;
+}
+.mcbtnbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/** 登出按鈕 **/
+.logoutbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: none;
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    font-family: NotoSansTC;
+    font-weight: 500;
+    font-size: 15px;
+    width: 100%;
+    height: 45px;
+    margin: 10px;
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out, transform 0.2s ease-in-out;
+    background-color: #c64f4f;
+}
+.logoutbtn:hover{
+    background-color: #9b3d3d;
+}
+.logoutbtn:active{
+    transform: scale(0.9);
+}
+/** 分隔線 **/
+#line{
+    height: 1px;
+    width: 100%;
+    background-color: #cecece;
+    margin: 10px;
+    position: absolute;
+    z-index: 0;
+}
+.othertext{
+    display: flex;
+    margin: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    padding: 5px;
+    width: 95%;
+}
+.othertext p{
+    background-color: white;
+    z-index: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #757575;
+    margin: 0px;
+}
+.otherop{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+@media (min-width: 100px) {
+    .otherop{
+        flex-direction: column;
+    }
+}
+@media (min-width: 500px) {
+    .otherop{
+        flex-direction: row;
+    }
+}
+

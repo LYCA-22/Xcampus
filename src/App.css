@@ -1,0 +1,351 @@
+#root {
+  margin: 0;
+  font-family: NotoSansTC;
+}
+
+body{
+  margin: 0px;
+  padding: 0px;
+  background-image: url(./pages/assets/backimage.jpg);
+  background-size: contain;
+  height: 100lvh;
+}
+
+main{
+  display: flex;
+  height: 100lvh;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: #edededb4;
+  overflow-y: auto;
+}
+
+main.theme-dark{
+  background-color: #38383897;
+}
+
+.displaynone{
+  display: none !important;
+}
+.displayflex{
+  display: flex;
+}
+button, a{
+  cursor: pointer;
+}
+
+/** 手機導覽列設定 **/
+.moblieshow{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.825);
+  border-top: 1px solid #efefef;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  padding: 5px 15px 30px 15px;
+  box-sizing: border-box;
+}
+/** 為螢幕大小調整 **/
+@media (min-width:100px) {
+  .moblieshow{
+    display: block;
+  }
+}
+@media (min-width:500px) {
+  .moblieshow{
+    display: none;
+  }
+}
+
+.mobliebar{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.mobliebar a{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  margin: 5px;
+  flex-direction: column;
+  text-decoration: none;
+  border-radius: 10px;
+  width: 55px;
+}
+
+
+/** 側邊欄 **/
+.sidebar{
+  height: 100%;
+  position: relative;
+  padding: 10px;
+  padding-top: 80px;
+  box-sizing: border-box;
+}
+.applogo{
+  margin: 20px;
+  margin-left: 15px;
+  position: absolute;
+  top: 0;
+  height: 40px;
+  width: 40px;
+}
+.show{
+  display: block;
+  position: relative;
+}
+
+@media (min-width:100px) {
+  .show{
+     display: none;
+   }
+}
+ @media (min-width:500px) {
+   .show{
+     display: block;
+   }
+}
+
+/** 側邊欄收合設定 **/
+nav.open{
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  transition: width 0.2s ease-in-out, opacity 0.2s ease-in-out, padding 0.2s ease-in-out, margin 0.2s ease-in-out;
+}
+nav.close{
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  transition: width 0.2s ease-in-out, opacity 0.2s ease-in-out, padding 0.2s ease-in-out, margin 0.2s ease-in-out;
+}
+
+/** 側邊欄按鈕 **/
+
+.sidechangebtn{
+  background-color: rgb(251, 251, 251);
+  border-radius: 100px;
+  border: 0px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  position: fixed;
+  z-index: 1000;
+  bottom: 20px;
+  left: 25px;
+  transition: background-color 0.2s ease-in-out, transfrom 0.2s ease-in-out;
+  color: #000;
+}
+.sidechangebtn.theme-dark{
+  background-color: rgb(106, 106, 106);
+  color: #000;
+}
+.sidechangebtn.theme-dark svg{
+  fill: rgb(255, 255, 255);
+}
+.sidechangebtn.normal svg{
+  transform: rotate(180deg);
+  transition: transfrom 0.2s ease-in-out;
+}
+.sidechangebtn.open svg{
+  transform: rotate(0deg);
+  transition: transfrom 0.2s ease-in-out;
+}
+.sidechangebtn:hover{
+  background-color: #ecebeb;
+}
+.sidechangebtn.theme-dark:hover{
+  background-color: #454545;
+}
+
+.sidebar a{
+  text-decoration: none;
+  display: flex;
+}
+
+.sidebtn{
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease-in-out;
+  height: 30px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.sidebtn:active{
+  transform: scale(0.95);
+}
+
+.sidebar a:hover .sidebtn, .ft_btn:hover{
+  background-color: #989fa929;
+}
+
+.link_p{
+  margin: 5px;
+  font-family: NotoSansTC;
+  font-weight: 500;
+  margin-right: auto;
+}
+.link_p.hidden{
+  display: none;
+}
+.link_p.theme-dark{
+  background-color: transparent;
+  color: rgb(173, 173, 173);
+}
+.isin{
+  color: #000000;
+  background-color: #ffffff;
+}
+.sbtn{
+  background-color: transparent;
+  color: #7c7c7cbe;
+}
+
+.ftbox{
+  margin-bottom: 55px;
+  margin-top: auto;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+}
+.ftbox_line{
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: #b9b9b9;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.ft_btn{
+  background-color: transparent;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease-in-out;
+  border: 0px;
+  font-size: 15px;
+  color: #7c7c7cbe;
+}
+
+/** section **/
+@media (min-width:100px) {
+  .section{
+    box-shadow: none;
+    border-radius: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  }
+}
+@media (min-width:500px) {
+  .section{
+    box-shadow: 0px 0px 20px 3px #51515117;
+    border-radius: 30px;
+    margin: 15px;
+    box-sizing: border-box;
+  }
+}
+.section{
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  overflow-y: auto;
+  position: relative;
+  box-sizing: border-box;
+}
+.section.theme-dark{
+  background-color: rgb(57, 57, 57);
+}
+
+/** Footer **/
+@media (min-width:100px) {
+  footer{
+    margin-bottom: 80px;
+  }
+}
+@media (min-width:500px) {
+  footer{
+    margin-bottom: 0px;
+  }
+}
+
+footer{
+  margin-top: 20px;
+  display: flex;
+  padding: 15px;
+  background-color: #efefef63;
+}
+footer.theme-dark{
+  background-color: #efefef2b;
+}
+footer p{
+  margin: 0px;
+  font-size: 12px;
+  color: #7c7c7c;
+}
+footer.theme-dark p{
+  color: #dedede;
+}
+.footer-linkbox{
+  display: flex;
+}
+.footer-linkbox a{
+  font-size: 12px;
+  padding-right: 10px;
+  color: #7c7c7c;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+.footer-linkbox.theme-dark a{
+  color: #dedede;
+}
+.footer-linkbox a:hover{
+  text-decoration: underline;
+}
+.footer-linkbox a:not(:last-child):after{
+  content: '';
+  display: block;
+  width: 1px;
+  height: 70%;
+  background-color: #7c7c7c;
+  margin-left: 10px;
+}
+.footer-linkbox.theme-dark a:not(:last-child):after{
+  background-color: #b0b0b0;
+}
+@media (min-width:100px) {
+  footer{
+    flex-direction: column;
+  }
+  .footer-linkbox{
+    margin-top: 10px;
+  }
+}
+@media (min-width:700px) {
+  footer{
+    flex-direction: row;
+  }
+  .footer-linkbox{
+    margin-top: 0px;
+    margin-left: auto;
+  }
+}
