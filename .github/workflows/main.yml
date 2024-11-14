@@ -1,0 +1,36 @@
+name: Deploy React App
+
+on:
+  push:
+    branches:
+      - main    # 生產環境部署
+      - beta    # Beta 版環境部署
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build React app
+      run: npm run build
+
+    - name: Deploy to hosting
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/beta" ]; then
+          echo "Deploying to Beta site"
+          # 部署到 Beta 網站
+        else
+          echo "Deploying to Production site"
+          # 部署到生產環境
+        fi
