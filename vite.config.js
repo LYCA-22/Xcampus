@@ -11,6 +11,6 @@ export default defineConfig({
     react(),
   ],
   define: {
-    __VITE_IS_BETA__: JSON.stringify(process.env.VITE_IS_BETA),
+    'import.meta.env.VITE_IS_BETA': JSON.stringify(process.env.VITE_IS_BETA),
   },
 })
