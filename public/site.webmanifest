@@ -3,12 +3,12 @@
     "name": "LIP 校園資訊整合平台",
     "icons": [
       {
-        "src": "./applogo-beta.png",
+        "src": "/applogo-beta.png",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "./applogo-beta.png",
+        "src": "/applogo-beta.png",
         "sizes": "192x192",
         "type": "image/png"
       }
