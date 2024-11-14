@@ -10,4 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
   ],
+  define: {
+    __VITE_IS_BETA__: JSON.stringify(process.env.VITE_IS_BETA),
+  },
 })
