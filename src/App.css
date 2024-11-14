@@ -44,7 +44,7 @@ button, a{
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   z-index: 100;
-  padding: 5px 15px 30px 15px;
+  padding: 5px 5px 25px 5px;
   box-sizing: border-box;
 }
 /** 為螢幕大小調整 **/
@@ -61,7 +61,7 @@ button, a{
 
 .mobliebar{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
 }
 .mobliebar a{
@@ -74,13 +74,20 @@ button, a{
   text-decoration: none;
   border-radius: 100px;
   width: 55px;
-  color: #1c1c1c;
+  color: #8e8e8e;
+}
+.mobliebar a.navbtn-active{
+  color: #000000;
 }
 .sparkbtn{
   background-color: #eaeaea;
   border-radius: 100px;
-  padding: 5px;
+  padding: 8px 15px 8px 15px;
   color: #5e5e5e;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  border: none;
 }
 
 
