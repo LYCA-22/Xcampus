@@ -160,7 +160,7 @@ function App(){
   useEffect(() => {
     CheckUser();
     register();
-    const isBeta = process.env.REACT_APP_IS_BETA === 'true';
+    const isBeta = process.env.VITE_IS_BETA === 'true';
     if (isBeta) {
       console.log('This is the Beta version!');
     } else {
