@@ -162,7 +162,7 @@ function App(){
     register();
     const isBeta = process.env.REACT_APP_IS_BETA === 'true';
     if (isBeta) {
-      console.log('This is the Beta version!');
+      console.log('這是測試版本');
     } else {
       console.log('This is the Stable version!');
     }
