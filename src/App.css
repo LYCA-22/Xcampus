@@ -72,8 +72,15 @@ button, a{
   margin: 5px;
   flex-direction: column;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 100px;
   width: 55px;
+  color: #1c1c1c;
+}
+.sparkbtn{
+  background-color: #eaeaea;
+  border-radius: 100px;
+  padding: 5px;
+  color: #5e5e5e;
 }
 
 
