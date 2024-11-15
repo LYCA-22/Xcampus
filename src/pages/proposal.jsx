@@ -8,21 +8,20 @@ import { useLocation, Navigate } from 'react-router-dom';
 
 function Proposal() {
     const [filter, setFilter] = useState('')
-    const [activebtn, setActivebtn] = useState('')
-    const ProposalProgress = () => {
-        const [proposals, setProposals] = useState([]); 
-        const [loading, setLoading] = useState(true); 
-        const [error, setError] = useState(null); 
+    const [proposals, setProposals] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const location = useLocation();
+    const currentPath = window.location.pathname;
 
-        
-        useEffect(() => {
-          const fetchProposals = async () => {
+    useEffect(() => {
+        const fetchProposals = async () => {
             try {
                 const querySnapshot = await getDocs(collection(store, 'schedule'));
                 const proposalsData = [];
                 querySnapshot.forEach((doc) => {
-                    proposalsData.push({ 
-                        id: doc.id, ...doc.data() 
+                    proposalsData.push({
+                        id: doc.id, ...doc.data()
                     });
                 });
 
@@ -32,36 +31,34 @@ function Proposal() {
             } finally {
                 setLoading(false)
             }
-          };
-          fetchProposals();
-        }, []);
-    
-        const location = useLocation();
-        const currentPath = window.location.pathname;
-        useEffect(() => {
-            const loadingbox = document.getElementById('loadingbox');
-            const mainbox = document.getElementById('mainbox');
-    
-            if (loading === true && currentPath === '/proposal'){
-                loadingbox.classList.remove('hidden')
-                loadingbox.classList.add('fadeIn')
-                setTimeout(() => {
-                    loadingbox.classList.remove('fadeIn')
-                    loadingbox.classList.add('show') 
-                    mainbox.classList.remove('fade')
-                    mainbox.classList.add('show')
-                },50)
-            } 
-    
-        })
+        };
+        fetchProposals();
+
+        const loadingbox = document.getElementById('loadingbox');
+        const mainbox = document.getElementById('mainbox');
+
+        if (loading === true && currentPath === '/proposal'){
+            loadingbox.classList.remove('hidden')
+            loadingbox.classList.add('fadeIn')
+            setTimeout(() => {
+                loadingbox.classList.remove('fadeIn')
+                loadingbox.classList.add('show')
+                mainbox.classList.remove('fade')
+                mainbox.classList.add('show')
+            },50)
+        }
+    }, []);
+
+
+    const ProposalProgress = React.memo(() => {
       
         // 加載狀態
         if (loading) {
             return (        
                 <div className="loadingbox hidden" id="loadingbox">
                     <div className="mainbox fade" id="mainbox">
+                        <div className='loader'></div>
                         <h3>載入資料中</h3>
-                        <img src={loadingGIF} className="gif" id="loadingGIF"></img>
                     </div>
                 </div>
             );
@@ -160,38 +157,71 @@ function Proposal() {
         } else {
           return (
             <ul className="dataul">
-                <li className="proposalli">
-                    <div className="data-text">
-                        <div className="datatitlebox">無資料</div>
-                    </div>
-                </li>
+                <div className="error-message">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 10.5V7M12 14H12.01M9.9 19.2L11.36 21.1467C11.5771 21.4362 11.6857 21.5809 11.8188 21.6327C11.9353 21.678 12.0647 21.678 12.1812 21.6327C12.3143 21.5809 12.4229 21.4362 12.64 21.1467L14.1 19.2C14.3931 18.8091 14.5397 18.6137 14.7185 18.4645C14.9569 18.2656 15.2383 18.1248 15.5405 18.0535C15.7671 18 16.0114 18 16.5 18C17.8978 18 18.5967 18 19.1481 17.7716C19.8831 17.4672 20.4672 16.8831 20.7716 16.1481C21 15.5967 21 14.8978 21 13.5V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V13.5C3 14.8978 3 15.5967 3.22836 16.1481C3.53284 16.8831 4.11687 17.4672 4.85195 17.7716C5.40326 18 6.10218 18 7.5 18C7.98858 18 8.23287 18 8.45951 18.0535C8.76169 18.1248 9.04312 18.2656 9.2815 18.4645C9.46028 18.6137 9.60685 18.8091 9.9 19.2Z"
+                            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <div className="datatitlebox">無資料</div>
+                </div>
             </ul>
-        );
+          );
         }
-    };
+    });
 
-    
-    const BtnClass = (type) => {
-        return filter === type ? 'filterbtn active' : 'filterbtn'
-    };
+    const [menu, setMenu] = useState(false);
+    const [selected, setSelected] = useState('');
+    const setType = (type) => {
+        setFilter(type)
+        setSelected(type)
+        setMenu(false)
+    }
 
 
     return (
         <section>
-            <div className="filteroutbox">
-                <div className="filtertoolbox">
-                    <div>
-                        <h1 className="ftb_title">提案進度查詢</h1>
-                        <button className={BtnClass('')} onClick={() => {setFilter('')}}>全部</button>
-                        <button className={BtnClass('學權')} onClick={() => {setFilter('學權')}}>學權</button>
-                        <button className={BtnClass('活動')} onClick={() => {setFilter('活動')}}>活動</button>
-                        <button className={BtnClass('其他')} onClick={() => {setFilter('其他')}}>其他</button>
-                        <button className={BtnClass('已完成')} onClick={() => {setFilter('已完成')}}>已完成</button>
-                    </div>
-                </div>
+            <div>
+                <h1 className="sitetitle" id='p_title'>提案進度查詢</h1>
             </div>
-            <div className="ppbox">
-                <ProposalProgress />
+            <div className='p_content'>
+                <div className="filteroutbox">
+                    <div className={ menu ? 'search_type_box menu-is-open' : 'search_type_box'}>
+                        <div className='fun-box' onClick={() => {setMenu(!menu)}}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3.38589 5.66687C2.62955 4.82155 2.25138 4.39889 2.23712 4.03968C2.22473 3.72764 2.35882 3.42772 2.59963 3.22889C2.87684 3 3.44399 3 4.57828 3H19.4212C20.5555 3 21.1227 3 21.3999 3.22889C21.6407 3.42772 21.7748 3.72764 21.7624 4.03968C21.7481 4.39889 21.3699 4.82155 20.6136 5.66687L14.9074 12.0444C14.7566 12.2129 14.6812 12.2972 14.6275 12.3931C14.5798 12.4781 14.5448 12.5697 14.5236 12.6648C14.4997 12.7721 14.4997 12.8852 14.4997 13.1113V18.4584C14.4997 18.6539 14.4997 18.7517 14.4682 18.8363C14.4403 18.911 14.395 18.9779 14.336 19.0315C14.2692 19.0922 14.1784 19.1285 13.9969 19.2012L10.5969 20.5612C10.2293 20.7082 10.0455 20.7817 9.89802 20.751C9.76901 20.7242 9.6558 20.6476 9.583 20.5377C9.49975 20.4122 9.49975 20.2142 9.49975 19.8184V13.1113C9.49975 12.8852 9.49975 12.7721 9.47587 12.6648C9.45469 12.5697 9.41971 12.4781 9.37204 12.3931C9.31828 12.2972 9.2429 12.2129 9.09213 12.0444L3.38589 5.66687Z"
+                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <div className='p_inputbox'>
+                                <p className='se_label'>選擇類別</p>
+                                <div className='p_select' id='choose_type'>{selected ? selected : '依據政見類別查詢'}</div>
+                            </div>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg" className={ menu ? 'se_arrow menu-is-open' : 'se_arrow'}>
+                                <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                      strokeLinejoin="round"/>
+                            </svg>
+                        </div>
+                        {menu &&
+                            <div className='se_menu'>
+                                <ul className="options_ul">
+                                    <li key='' onClick={() => setType('')} className='option'>
+                                        全部
+                                    </li>
+                                    <li key='學權' onClick={() => setType('學權')} className='option'>
+                                        學權
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+                <div className="ppbox">
+                    <ProposalProgress/>
+                </div>
             </div>
         </section>
     );
