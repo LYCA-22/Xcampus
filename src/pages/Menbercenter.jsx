@@ -184,7 +184,11 @@ const ACHome = () => {
             <p className="acc_top_formtext" id="mctitle">管理你的基本資料</p>
             <div className="userCard">
                 <div className="userPhoto">
-                    <p className='un_ab'>{userName.toString().split(' ')[0][0] + userName.toString().split(' ')[1][0]}</p>
+                    <p className='un_ab'>
+                        {userName && userName.toString().split(' ').length > 1
+                            ? userName.split(' ')[0][0] + userName.split(' ')[1][0]
+                            : userName[0] || ''}
+                    </p>
                 </div>
                 <div className="userInformation">
                     <h1 className="userName">{userName}</h1>
