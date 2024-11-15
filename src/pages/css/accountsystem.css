@@ -105,120 +105,6 @@ input:focus{
     transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
 }
 
-/** 登入頁面 **/
-.loginpage-applogo{
-    margin: 10px;
-    margin-top: 0px;
-    height: 45px;
-    width: 45px;
-}
-.loginbox{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-    background-image: url('/src/pages/assets/login_image.jpg');
-    background-size: cover;
-    position: relative;
-}
-.loginform{
-    border-radius: 35px;
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
-    position: absolute;
-    background-color: white;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-}
-@media (min-width:100px) {
-    .loginform{
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-        width: 100%;
-        box-sizing: border-box;
-        bottom: 0px;
-    }
-}
-@media (min-width:500px) {
-    .loginform{
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-        bottom: 0px;
-        width: 70%;
-    }
-}
-@media (min-width:800px) {
-    .loginform{
-        height: 100%;
-        border-radius: 0px;
-        padding-left: 70px;
-        padding-right: 70px;
-        width: 500px;
-        right: 0px;
-    }
-}
-.formtitle{
-    font-family: NotoSansTC;
-    font-weight: 600;
-    margin: 10px;
-    font-size: 30px;
-}
-@media (min-width:100px) {
-    .formtitle{
-        font-size: 22px;
-    }
-}
-@media (min-width:700px) {
-    .formtitle{
-        font-size: 28px;
-    }
-}
-.login-btnbox{
-    width: 100%;
-    display: flex;
-    justify-content:space-between;
-    margin-top: 10px;
-}
-.loginpagebtn{
-    display: flex;
-    justify-content: center;
-    border-radius: 10px;
-    background-color: transparent;
-    border: 2px solid #dfdfdf;
-    padding: 10px;
-    color: #1c1c1c;
-    font-family: NotoSansTC;
-    font-weight: 500;
-    font-size: 15px;
-    width: 48%;
-    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-.loginpagebtn:hover{
-    background-color: #dfdfdf4c;
-}
-.loginpagebtn:active{
-    transform: scale(0.95);
-    background-color: #dfdfdf;
-}
-.loginpagebtn:disabled{
-    background-color: #dfdfdfc0;
-    color: #cecece;
-    cursor: not-allowed;
-}
-#toproposalbtn{
-    width: 100%;
-    margin-top: 15px;
-    padding: 0px;
-}
-#toproposalbtn a{
-    width: 100%;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 /** 載入狀態 **/
 .loadingbox.hidden{
     display: none;
@@ -490,10 +376,22 @@ input:focus{
 }
 
 .userInformation{
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     margin: 20px;
     box-sizing: border-box;
+}
+.userName{
+    font-family: Inter, system-ui;
+}
+.userText{
+    font-family: Inter, system-ui;
+    border: 1px solid #cdcdcd;
+    display: block;
+    padding: 10px;
+    border-radius: 100px;
+    font-weight: 500;
+    margin: 0 auto 0 0;
 }
 @media (min-width:100px) {
     .userName{
@@ -501,10 +399,7 @@ input:focus{
         margin-top: 0px;
     }
     .userText{
-        font-family: NotoSansTC;
-        font-weight: 500;
         font-size: 14px;
-        margin: 0px;
     }
     .userCard{
         padding: 10px;
@@ -517,10 +412,7 @@ input:focus{
         margin-top: 0px;
     }
     .userText{
-        font-family: NotoSansTC;
-        font-weight: 500;
-        font-size: 18px;
-        margin: 0px;
+        font-size: 16px;
     }
     .userCard{
         padding: 30px;
@@ -540,7 +432,7 @@ input:focus{
     align-items: center;
 }
 .lu-title{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Inter, system-ui;
     font-weight: 500;
     color: #000;
     margin: 0px;
@@ -553,8 +445,8 @@ input:focus{
     align-items: center;
 }
 .lu_p{
-    margin: 0px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 10px 0 10px 0;
+    font-family: Inter, system-ui;
     font-weight: 500;
     color: #757575;
     font-size: 14px;
@@ -666,15 +558,25 @@ input:focus{
     margin-right: auto;
 }
 /** 帳號圖片 **/
-.userPhotoBox{
+.userPhoto{
     margin: 10px;
-}
-.userimg{
-    width: 150px;
-    height: 150px;
     border-radius: 100px;
-    object-fit: cover;
+    width: 80px;
+    height: 80px;
+    background-color: #b0caa0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
 }
+.un_ab{
+    font-family: Inter, system-ui;
+    font-weight: 600;
+    font-size: 28px;
+    margin: 0px;
+}
+
 @media (min-width:100px) {
     .userimg{
         width: 120px;

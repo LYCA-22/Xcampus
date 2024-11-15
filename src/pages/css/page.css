@@ -1,7 +1,7 @@
 /** 適用於所有分頁 **/
 .sitetitle{
     padding: 0px;
-    font-family: NotoSansTC;
+    font-family: Inter, system-ui;
     font-weight: 600;
     margin: 25px;
     font-size: 24px;
@@ -115,10 +115,13 @@
     transform: rotate(180deg);
 }
 .se_label{
-    margin: 5px 5px 5px 0px;
+    margin: 5px 5px 0 0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Inter, system-ui;
 }
 .se_menu{
-    padding: 10px;
+    padding: 10px 0 10px 0;
     border-top: 1px solid #cdcdcd;
     margin-top: 5px;
 }
@@ -128,12 +131,17 @@
     margin: 0;
 }
 .option{
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
+    font-family: Inter, system-ui;
+    font-weight: 500;
+    display: flex;
 }
 .option:hover{
-    padding: 10px;
     background-color: #ffffff;
     border-radius: 100px;
+}
+.done_icon{
+    margin: 0 10px 0 auto;
 }
 
 .p_select{

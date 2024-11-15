@@ -1,46 +1,78 @@
 import React, {useEffect, useState} from "react";
 import './css/page.css'
-import { app, storage, ref, uploadBytesResumable, collection, addDoc, getDoc, getDocs, store, doc, setDoc, onAuthStateChanged, CheckAuth, createUserWithEmailAndPassword, signOut } from './firebase'
-import loadingGIF from './assets/loadingGIF.gif'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TextField, Select, MenuItem, FormControl, InputLabel, Menu, Button, styled, Switch } from "@mui/material";
+import { useAuth } from '../AuthContext';
 
 function Register() {
-
-    const [user, setUser] = useState(null);
+    const {userLevel} = useAuth()
     const [adminAccess, setAdminAccess] = useState(false);
     useEffect(() => {
         document.title = 'LIP 內部帳號註冊'
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            if (currentUser) {
-            fetchUserData(currentUser);
-            }
-        });
-        const fetchUserData = async (currentUser) => {
-            const userGradeRef = doc(store, 'users', currentUser.uid);
-            const docSnap = await getDoc(userGradeRef);
-            if (docSnap.exists()) {
-            setAdminAccess(docSnap.data().admin_access)
-            }
-        };
-  
-      // 清理事件監聽器和訂閱
-      return () => {
-        unsubscribe();
-      };
+        // 檢測用戶層級是否可以創建帳號
+        if (userLevel === 'L04') {
+            setAdminAccess(true);
+        } else {
+            setAdminAccess(false);
+        }
     })
 
-    //用戶資訊狀態管理
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
+    //新用戶資訊狀態管理
+    const [new_name, setName] = useState('')
+    const [new_email, setEmail] = useState('')
     const [grade, setGrade] = useState('')
     const [role, setRole] = useState('')
     const [Class, setClass] = useState('')
-    const [password, setPassword] = useState('')
+    const [new_password, setPassword] = useState('')
     const [adac, setAdac] = useState(false)
-    const [userLevel, setUserLevel] = useState('')
+    const [newuserLevel, setNewUserLevel] = useState('')
     const [ckreadpaper, setCkreadpaper] = useState(false)
+    const [ad, setAd] = useState('0')
+
+    //註冊狀態管理
+    const [loading, setLoading] = useState(false)
+    const [message, setMessage] = useState('')
+
+    useEffect(() => {
+        if (adac === true) {
+            setAd('1')
+        }
+
+        const loadingbox = document.getElementById('loadingbox');
+        const mainbox = document.getElementById('mainbox');
+        if (loading === true || message !== ''){
+            loadingbox.classList.remove('hidden')
+            loadingbox.classList.add('fadeIn')
+            setTimeout(() => {
+                mainbox.classList.remove('fade')
+                mainbox.classList.add('show')
+                loadingbox.classList.remove('fadeIn')
+                loadingbox.classList.add('show')
+            },200)
+        }
+    }, [adac, loading, message]);
+
+
+    const Loadingbox = () => {
+        if (loading === false && message != '') {
+            return (
+                <div className="loadingbox hidden" id="loadingbox">
+                    <div className="mainbox fade" id="mainbox">
+                        <h3>{message}</h3>
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div className="loadingbox hidden" id="loadingbox">
+                    <div className="mainbox fade" id="mainbox">
+                        <div className='loader'></div>
+                        <h3>註冊中</h3>
+                    </div>
+                </div>
+            );
+        }
+    }
 
     //元件樣式設定
     const CFormControl = styled(FormControl)({
@@ -90,39 +122,49 @@ function Register() {
         fontWeight: '500',
     }))
 
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const regAuth = (event) => {
+    const regAuth = async (event) => {
         event.preventDefault();
         console.log('執行中')
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            // 用戶成功創建後，將其他資料存入 Firestore
-            return setDoc(doc(store, "users", user.uid), {
-                name: name,
-                admin_access: adac,
-                class: Class,
-                userLevel: userLevel,
-                role: role,
-                grade: grade,
-                createdTime: new Date()  // 保存創建日期
-            });
-        })
-        .then(() => {
-            window.alert('帳號建立成功');
-            signOut(auth);
-        })
-        .catch((error) => {
-            // 錯誤處理
-            window.alert('Error creating user:', error.code, error.message);
-        });
+        try {
+            setLoading(true);
+            const creatNewUser = await fetch('https://lycaapis.zhicheng-gong.workers.dev/userRegister', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: new_email,
+                    password: new_password,
+                    name: new_name,
+                    admin_access: ad,
+                    user_level: newuserLevel,
+                    user_class: Class,
+                    user_grade: grade,
+                    user_role: role
+                })
+            })
+
+            const result = await creatNewUser.json()
+
+            if (creatNewUser.ok){
+                setLoading(false);
+                setMessage('創建成功')
+                setTimeout(() => {
+                    window.location.herf = '/'
+                }, 500)
+            } else {
+                setLoading(false);
+                setTimeout(() => {
+                    setMessage(result.error)
+                }, 200)
+            }
+        } catch (e){
+            setLoading(false);
+            console.log(e)
+        }
     }
 
     return(
         <>
-            <CheckAuth />
+            <Loadingbox />
             {!adminAccess ? <h1 className="sitetitle">權限不足</h1>:
                 <div>
                     <div className="reg_titlebox">
@@ -173,11 +215,11 @@ function Register() {
                         
                         {adac && <CFormControl fullWidth variant="filled" required>
                             <InputLabel id="userlevel-label">用戶權限等級</InputLabel>
-                            <Select labelId="userlevel-label" id='role' value={userLevel} onChange={(e) => setUserLevel(e.target.value)} className="select-input" MenuProps={{PaperProps: {component: CMenuPaper}}} >
-                                <CMenuItem value='L1'>L1</CMenuItem>
-                                <CMenuItem value='L2'>L2</CMenuItem>
-                                <CMenuItem value='L3'>L3</CMenuItem>
-                                <CMenuItem value='L4'>L4 (最高權限)</CMenuItem>
+                            <Select labelId="userlevel-label" id='role' value={newuserLevel} onChange={(e) => setNewUserLevel(e.target.value)} className="select-input" MenuProps={{PaperProps: {component: CMenuPaper}}} >
+                                <CMenuItem value='L01'>L01</CMenuItem>
+                                <CMenuItem value='L02'>L02</CMenuItem>
+                                <CMenuItem value='L03'>L03</CMenuItem>
+                                <CMenuItem value='L04'>L04 (最高權限)</CMenuItem>
                             </Select>
                         </CFormControl>}
                        
@@ -187,7 +229,7 @@ function Register() {
                             <Switch className='switchbtn' required inputProps={{ 'aria-label': 'controlled' }} checked={ckreadpaper} onChange={(e) => setCkreadpaper(e.target.checked)} sx={{padding: "5px",display:'flex',alignItems:"center",justifyItems: 'center', justifyContent: 'center','.MuiSwitch-track': {backgroundColor: '#a9a9a9',opacity: '0.38',borderRadius: '100px',},'.MuiSwitch-thumb': {backgroundColor: '#808080',boxShadow: '0px 0px 0px 0px',transform: 'scale(0.8)'},'.Mui-checked': {'.MuiSwitch-thumb': {backgroundColor: 'white',boxShadow: '0px 0px 0px 0px',transform: 'scale(1)'}}, '.MuiButtonBase-root': {padding:'3.5px', margin:'5px'}}} />
                         </div>
                         <button disabled={!ckreadpaper} className="reg_formbtn" id='reg_submitbtn' type="submit">建立帳號</button>
-                        <p className="alertText">▸ 為維護本平台會員權益，建立內部帳號後系統會自動登出所有帳號 ◂</p>
+                        <p className="alertText">▸ 注意：創建帳號為L04層級者才可創建 ◂</p>
                         <p className="alertText">▸ 如有任何問題請洽本會資訊組 ◂</p>
                     </form>
                 </div>

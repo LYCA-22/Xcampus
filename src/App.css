@@ -302,7 +302,6 @@ nav.close{
 
 footer{
   margin: 0;
-  margin-bottom: 80px;
   display: flex;
   padding: 15px;
   background-color: #efefef63;
@@ -348,9 +347,15 @@ footer.theme-dark p{
 @media (min-width:100px) {
   footer{
     flex-direction: column;
+    margin-bottom: 80px;
   }
   .footer-linkbox{
     margin-top: 10px;
+  }
+}
+@media (min-width:500px) {
+  footer{
+    margin-bottom: 0;
   }
 }
 @media (min-width:700px) {

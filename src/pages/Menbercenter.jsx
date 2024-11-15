@@ -1,9 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { CheckAuth, signOut, auth ,app, analytics, storage, ref, uploadBytesResumable, getDownloadURL, onAuthStateChanged, collection, addDoc, getDoc, store, doc, updateDoc, setDoc, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from './firebase'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation, BrowserRouter, useNavigate, Navigate } from 'react-router-dom';
-import { updateProfile } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 import './css/accountsystem.css'
-import loadingGIF from './assets/loadingGIF.gif'
 import { TextField, Select, MenuItem, FormControl, InputLabel, Menu, Button, styled } from "@mui/material";
 import { useAuth } from '../AuthContext';
 
@@ -11,8 +8,8 @@ function LoadingBox() {
     return (
         <div className="loadingbox hidden" id="loadingbox">
             <div className="mainbox fade" id="mainbox">
+                <div className='loader'></div>
                 <h3>登出中</h3>
-                <img src={loadingGIF} className="gif" id="loadingGIF"></img>
             </div>
         </div>
     )
@@ -173,20 +170,21 @@ const ACHome = () => {
     const [changeGrade, setGD] = useState(false)
     const [changeClass, setCL] = useState(false)
 
+    const logout = () => {
+        logoutUser();
+        setTimeout(() => {
+            window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.xcp.lyhsca.org';
+        }, 500)
+    }
+
 
     return (
         <>
             <h1 className="acc_top_formtitle" id="mctitle">帳戶</h1>
             <p className="acc_top_formtext" id="mctitle">管理你的基本資料</p>
             <div className="userCard">
-                <div className="userPhotoBox">
-                    <img alt="Profile" className="userimg"/>
-                    <div className="changefilesbox">
-                        <label htmlFor="input-files" className="changephotobtn">
-                            <img src={loadingGIF} alt="Loading..." style={{ width: '20px', height: '20px' }} />
-                        </label>
-                        <input type="file" className="input-files" id="input-files" />
-                    </div>
+                <div className="userPhoto">
+                    <p className='un_ab'>{userName.toString().split(' ')[0][0] + userName.toString().split(' ')[1][0]}</p>
                 </div>
                 <div className="userInformation">
                     <h1 className="userName">{userName}</h1>
@@ -199,18 +197,25 @@ const ACHome = () => {
                     <p className="lu-title">姓名</p>
                     <div className="lu-fc">
                         <p className="lu_p">{userName}</p>
-                        <button className="changebtn" type="button" onClick={() => {setCN(!changeName)}}>{changeName ? '取消':'更改姓名'}</button>
+                        <button className="changebtn" type="button" onClick={() => {
+                            setCN(!changeName)
+                        }}>{changeName ? '取消' : '更改姓名'}</button>
                         {changeName && <button className="updatebtn" type="submit">完成</button>}
                     </div>
-                    {changeName && 
-                    <TextField required id="name" label="新姓名" type="text" value={userName} onChange={handleChangeName} fullWidth variant="filled" sx={{margin: '10px','.MuiInputBase-input, .MuiFormLabel-root': {fontFamily: 'NotoSansTC',fontWeight: '500',},'.MuiFilledInput-root': {borderTopRightRadius: '10px',borderTopLeftRadius: '10px',},'.MuiFilledInput-underline::before': {borderBottomColor: '#e5e5e5'}}}/>
+                    {changeName &&
+                        <TextField required id="name" label="新姓名" type="text" value={userName} fullWidth
+                                   variant="filled" sx={{
+                            margin: '10px',
+                            '.MuiInputBase-input, .MuiFormLabel-root': {fontFamily: 'NotoSansTC', fontWeight: '500',},
+                            '.MuiFilledInput-root': {borderTopRightRadius: '10px', borderTopLeftRadius: '10px',},
+                            '.MuiFilledInput-underline::before': {borderBottomColor: '#e5e5e5'}
+                        }}/>
                     }
                 </div>
                 <div className="list-userIn">
                     <p className="lu-title">電子郵件</p>
                     <div className="lu-fc">
                         <p className="lu_p">{userEmail}</p>
-                        <button className="changebtn" type="button" disabled>無法更改</button>
                     </div>
                     <p className="acc_alertText">▸ 此資料為一開始綁定，無法再進行修改 ◂</p>
                 </div>
@@ -218,47 +223,62 @@ const ACHome = () => {
                     <p className="lu-title">年級</p>
                     <div className="lu-fc">
                         <p className="lu_p">{grade_all[userGrade]}</p>
-                        <button className="changebtn" type="button" onClick={() => {setGD(!changeGrade)}}>{changeGrade ? '取消':'更改年級'}</button>
+                        <button className="changebtn" type="button" onClick={() => {
+                            setGD(!changeGrade)
+                        }}>{changeGrade ? '取消' : '更改年級'}</button>
                         {changeGrade && <button className="updatebtn" type="submit">完成</button>}
                     </div>
-                    {changeGrade && 
+                    {changeGrade &&
                         <CFormControl fullWidth variant="filled" required>
                             <InputLabel id="grade-label">請選擇欲更改的年級</InputLabel>
-                            <Select labelId="grade-label" id='grade' className="select-input" MenuProps={{PaperProps: {component: CMenuPaper}}} >
-                                <CMenuItem value='T00' disabled style={{ display: 'none' }}>無資料</CMenuItem>
+                            <Select labelId="grade-label" id='grade' className="select-input"
+                                    MenuProps={{PaperProps: {component: CMenuPaper}}}>
+                                <CMenuItem value='T00' disabled style={{display: 'none'}}>無資料</CMenuItem>
                                 <CMenuItem value='G01'>1年級</CMenuItem>
                                 <CMenuItem value='G02'>2年級</CMenuItem>
                                 <CMenuItem value='G03'>3年級</CMenuItem>
-                                <CMenuItem value='T01' disabled style={{ display: 'none' }}>測試用
+                                <CMenuItem value='T01' disabled style={{display: 'none'}}>測試用
                                 </CMenuItem>
                             </Select>
                         </CFormControl>
                     }
                 </div>
-                
+
                 <div className="list-userIn">
                     <p className="lu-title">班級</p>
                     <div className="lu-fc">
                         <p className="lu_p">{class_all[userClass]}</p>
-                        <button className="changebtn" type="button" onClick={() => {setCL(!changeClass)}}>{changeClass ? '取消':'更改班級'}</button>
+                        <button className="changebtn" type="button" onClick={() => {
+                            setCL(!changeClass)
+                        }}>{changeClass ? '取消' : '更改班級'}</button>
                         {changeClass && <button className="updatebtn" type="submit">完成</button>}
                     </div>
-                    {changeClass && 
+                    {changeClass &&
                         <CFormControl fullWidth variant="filled" required>
                             <InputLabel id="class-label">請選擇欲更改的班級</InputLabel>
-                            <Select labelId="class-label" id='class' className="select-input" disabled={check_is_test()} MenuProps={{PaperProps: {component: CMenuPaper}}} >
-                                <CMenuItem value='T00' disabled style={{ display: 'none' }}>無資料</CMenuItem>
+                            <Select labelId="class-label" id='class' className="select-input"
+                                    MenuProps={{PaperProps: {component: CMenuPaper}}}>
+                                <CMenuItem value='T00' disabled style={{display: 'none'}}>無資料</CMenuItem>
                                 <CMenuItem value='C01'>忠</CMenuItem>
                                 <CMenuItem value='C02'>孝</CMenuItem>
                                 <CMenuItem value='C03'>仁</CMenuItem>
                                 <CMenuItem value='C04'>愛</CMenuItem>
                                 <CMenuItem value='C05'>義</CMenuItem>
                                 <CMenuItem value='C06'>信</CMenuItem>
-                                <CMenuItem value='T01' disabled style={{ display: 'none' }}>測試用</CMenuItem>
+                                <CMenuItem value='T01' disabled style={{display: 'none'}}>測試用</CMenuItem>
                             </Select>
                         </CFormControl>
                     }
                 </div>
+                {adminAccess &&
+                    <div className="list-userIn">
+                        <p className="lu-title">管理中心存取權限</p>
+                        <div className="lu-fc">
+                            <p className="lu_p">{adminAccess ? '有權限' : '無權限'}</p>
+                        </div>
+                        <p className="acc_alertText">▸ 如需更新此資料請聯絡本會資訊組 ◂</p>
+                    </div>
+                }
                 <div className="list-userIn">
                     <p className="lu-title">身份</p>
                     <div className="lu-fc">
@@ -283,9 +303,12 @@ const ACHome = () => {
                 </div>
             </form>
             <div className='mcform'>
-                <button className="list-btn" onClick={() => Logout()}>
+                <button className="list-btn" onClick={logout}>
                     <div className="lb-fc">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="#000"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px"
+                             fill="#000">
+                            <path
+                                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
                         <p className="lb-title">登出帳戶</p>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#828282"><path d="m320.23-107.69-42.54-42.54L607.46-480 277.69-809.77l42.54-42.54L692.54-480 320.23-107.69Z"/></svg>

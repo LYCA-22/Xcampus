@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './css/page.css'
-import { app, analytics, storage, ref, uploadBytesResumable, collection, addDoc, getDoc, getDocs, store, doc, setDoc, serverTimestamp } from './firebase'
-import loadingGIF from './assets/loadingGIF.gif'
-import { useLocation, Navigate } from 'react-router-dom';
-
-
+import { collection, getDocs, store } from './firebase'
+import { useLocation } from 'react-router-dom';
 
 function Proposal() {
     const [filter, setFilter] = useState('')
@@ -13,6 +10,17 @@ function Proposal() {
     const [error, setError] = useState(null);
     const location = useLocation();
     const currentPath = window.location.pathname;
+
+    const Loadingbox = () => {
+        return (
+            <div className="loadingbox hidden" id="loadingbox">
+                <div className="mainbox fade" id="mainbox">
+                    <div className='loader'></div>
+                    <h1>載入中</h1>
+                </div>
+            </div>
+        );
+    }
 
     useEffect(() => {
         const fetchProposals = async () => {
@@ -49,20 +57,7 @@ function Proposal() {
         }
     }, []);
 
-
     const ProposalProgress = React.memo(() => {
-      
-        // 加載狀態
-        if (loading) {
-            return (        
-                <div className="loadingbox hidden" id="loadingbox">
-                    <div className="mainbox fade" id="mainbox">
-                        <div className='loader'></div>
-                        <h3>載入資料中</h3>
-                    </div>
-                </div>
-            );
-        }
         if (error) {
           console.log(error)
         }
@@ -91,7 +86,6 @@ function Proposal() {
                     ps_contain.classList.add('show')
                 }, 100)
             }
-
         }
 
         const filteredProposals = filter ? proposals.filter(proposal => proposal.type === filter) : proposals;
@@ -181,6 +175,7 @@ function Proposal() {
 
     return (
         <section>
+            <Loadingbox/>
             <div>
                 <h1 className="sitetitle" id='p_title'>提案進度查詢</h1>
             </div>
@@ -208,9 +203,23 @@ function Proposal() {
                                 <ul className="options_ul">
                                     <li key='' onClick={() => setType('')} className='option'>
                                         全部
+                                        {selected === '' &&
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg" className='done_icon'>
+                                            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        }
                                     </li>
                                     <li key='學權' onClick={() => setType('學權')} className='option'>
                                         學權
+                                        {selected === '學權' &&
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg" className='done_icon'>
+                                            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2"
+                                                  stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        }
                                     </li>
                                 </ul>
                             </div>

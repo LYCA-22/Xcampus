@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
                 setLoading(false);
             }, 500)
         } else {
-            window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.app.lyhsca.org';
+            window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.xcp.lyhsca.org';
         }
     }, []);
 
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
             setUserGrade('');
             setUserID('');
             setUserRole('');
-            window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.app.lyhsca.org';
+            window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.xcp.lyhsca.org';
         }
     }
 

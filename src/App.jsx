@@ -66,7 +66,7 @@ function SideBar(){
   const logout = () => {
     logoutUser();
     setTimeout(() => {
-      window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.app.lyhsca.org';
+      window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.xcp.lyhsca.org';
     }, 500)
   }
 
