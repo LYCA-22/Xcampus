@@ -162,11 +162,11 @@ nav.close{
 .sidechangebtn.theme-dark svg{
   fill: rgb(255, 255, 255);
 }
-.sidechangebtn.normal svg{
+.sidechangebtn.normal{
   transform: rotate(180deg);
   transition: transfrom 0.2s ease-in-out;
 }
-.sidechangebtn.open svg{
+.sidechangebtn.open{
   transform: rotate(0deg);
   transition: transfrom 0.2s ease-in-out;
 }
@@ -312,8 +312,8 @@ footer p{
   color: #7c7c7c;
   font-family: Inter, system-ui;
 }
-footer.theme-dark p{
-  color: #dedede;
+footer a{
+  text-decoration: none;
 }
 .footer-linkbox{
   display: flex;
@@ -326,9 +326,6 @@ footer.theme-dark p{
   display: flex;
   align-items: center;
   border-radius: 5px;
-}
-.footer-linkbox.theme-dark a{
-  color: #dedede;
 }
 .footer-linkbox a:hover{
   text-decoration: underline;

@@ -204,21 +204,41 @@ function Proposal() {
                                     <li key='' onClick={() => setType('')} className='option'>
                                         全部
                                         {selected === '' &&
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg" className='done_icon'>
-                                            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2"
-                                                  stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg" className='done_icon'>
+                                                <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2"
+                                                      strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
                                         }
                                     </li>
                                     <li key='學權' onClick={() => setType('學權')} className='option'>
                                         學權
                                         {selected === '學權' &&
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg" className='done_icon'>
-                                            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2"
-                                                  stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg" className='done_icon'>
+                                                <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2"
+                                                      strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
+                                        }
+                                    </li>
+                                    <li key='活動' onClick={() => setType('活動')} className='option'>
+                                        活動
+                                        {selected === '活動' &&
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg" className='done_icon'>
+                                                <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2"
+                                                      strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
+                                        }
+                                    </li>
+                                    <li key='已完成' onClick={() => setType('已完成')} className='option'>
+                                        已完成
+                                        {selected === '已完成' &&
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg" className='done_icon'>
+                                                <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2"
+                                                      strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
                                         }
                                     </li>
                                 </ul>

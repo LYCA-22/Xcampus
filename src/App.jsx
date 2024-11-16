@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Menbercenter  from './pages/Menbercenter';
 import OnVote from './pages/onlinevoting';
 import Register from './pages/register';
+import Admin  from "./pages/Admin.jsx";
 
 /* icon */
 import { HomeIcon, NewsIcon, ProposalIcon, McIcon } from './icons/Graphic control'
@@ -47,13 +48,16 @@ function SideBar(){
       Nav.classList.remove('open')
       Nav.classList.add('close')
       btn.classList.remove('normal')
-      btn.classList.add('open')
+      setTimeout(() => {
+        btn.classList.add('open')
+      }, 200)
+
 
     } else if (Nav.classList.contains('close')){
       Nav.classList.add('open')
       Nav.classList.remove('close')
+      btn.classList.add('normal')
       setTimeout(()=>{
-        btn.classList.add('normal')
         btn.classList.remove('open')
         btn_p.forEach((link_a) => {
           link_a.classList.remove('hidden')
@@ -102,19 +106,30 @@ function SideBar(){
           <span className='ftbox_line'></span>
           {adminAccess && (
             <Link to='/admin' id='btn_adcenter'>
-              <div className={currentPath === '/admin' ? 'isin sidebtn':'sbtn sidebtn'}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill={currentPath === '/admin' ? '#2b2b2b':"rgba(124, 124, 124, 0.745)"}><path d="M480-120q-17 0-28.5-11.5T440-160v-160q0-17 11.5-28.5T480-360q17 0 28.5 11.5T520-320v40h280q17 0 28.5 11.5T840-240q0 17-11.5 28.5T800-200H520v40q0 17-11.5 28.5T480-120Zm-320-80q-17 0-28.5-11.5T120-240q0-17 11.5-28.5T160-280h160q17 0 28.5 11.5T360-240q0 17-11.5 28.5T320-200H160Zm160-160q-17 0-28.5-11.5T280-400v-40H160q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h120v-40q0-17 11.5-28.5T320-600q17 0 28.5 11.5T360-560v160q0 17-11.5 28.5T320-360Zm160-80q-17 0-28.5-11.5T440-480q0-17 11.5-28.5T480-520h320q17 0 28.5 11.5T840-480q0 17-11.5 28.5T800-440H480Zm160-160q-17 0-28.5-11.5T600-640v-160q0-17 11.5-28.5T640-840q17 0 28.5 11.5T680-800v40h120q17 0 28.5 11.5T840-720q0 17-11.5 28.5T800-680H680v40q0 17-11.5 28.5T640-600Zm-480-80q-17 0-28.5-11.5T120-720q0-17 11.5-28.5T160-760h320q17 0 28.5 11.5T520-720q0 17-11.5 28.5T480-680H160Z"/></svg>
+              <div className={currentPath === '/admin' ? 'isin sidebtn' : 'sbtn sidebtn'}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill={currentPath === '/admin' ? '#2b2b2b' : "none"} xmlns="http://www.w3.org/2000/svg">
+                  <path
+                      d="M11.223 2.43177C11.5066 2.27421 11.6484 2.19543 11.7985 2.16454C11.9315 2.13721 12.0685 2.13721 12.2015 2.16454C12.3516 2.19543 12.4934 2.27421 12.777 2.43177L20.177 6.54288C20.4766 6.70928 20.6263 6.79248 20.7354 6.91082C20.8318 7.01551 20.9049 7.13959 20.9495 7.27477C21 7.42756 21 7.59889 21 7.94153V16.0586C21 16.4013 21 16.5726 20.9495 16.7254C20.9049 16.8606 20.8318 16.9847 20.7354 17.0893C20.6263 17.2077 20.4766 17.2909 20.177 17.4573L12.777 21.5684C12.4934 21.726 12.3516 21.8047 12.2015 21.8356C12.0685 21.863 11.9315 21.863 11.7985 21.8356C11.6484 21.8047 11.5066 21.726 11.223 21.5684L3.82297 17.4573C3.52345 17.2909 3.37369 17.2077 3.26463 17.0893C3.16816 16.9847 3.09515 16.8606 3.05048 16.7254C3 16.5726 3 16.4013 3 16.0586V7.94153C3 7.59889 3 7.42756 3.05048 7.27477C3.09515 7.13959 3.16816 7.01551 3.26463 6.91082C3.37369 6.79248 3.52345 6.70928 3.82297 6.54288L11.223 2.43177Z"
+                      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+
                 <p className='link_p'>管理中心</p>
               </div>
             </Link>)}
-          <button className='ft_btn' id='btn_logout' onClick={logout} >
-            <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="rgba(124, 124, 124, 0.745)"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h240q17 0 28.5 11.5T480-800q0 17-11.5 28.5T440-760H200v560h240q17 0 28.5 11.5T480-160q0 17-11.5 28.5T440-120H200Zm487-320H400q-17 0-28.5-11.5T360-480q0-17 11.5-28.5T400-520h287l-75-75q-11-11-11-27t11-28q11-12 28-12.5t29 11.5l143 143q12 12 12 28t-12 28L669-309q-12 12-28.5 11.5T612-310q-11-12-10.5-28.5T613-366l74-74Z"/></svg>
+          <button className='ft_btn' id='btn_logout' onClick={logout}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px"
+                 fill="rgba(124, 124, 124, 0.745)">
+              <path
+                  d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h240q17 0 28.5 11.5T480-800q0 17-11.5 28.5T440-760H200v560h240q17 0 28.5 11.5T480-160q0 17-11.5 28.5T440-120H200Zm487-320H400q-17 0-28.5-11.5T360-480q0-17 11.5-28.5T400-520h287l-75-75q-11-11-11-27t11-28q11-12 28-12.5t29 11.5l143 143q12 12 12 28t-12 28L669-309q-12 12-28.5 11.5T612-310q-11-12-10.5-28.5T613-366l74-74Z"/>
+            </svg>
             {user ? <p className='link_p'>登出</p> : <p className='link_p'>登入</p>}
           </button>
         </div>
       </nav>
       <button className='sidechangebtn normal' id='changemenu' onClick={changemenu}>
-      <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="#34495D"><path d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="#34495D">
+          <path
+              d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg>
       </button>
     </div>
   )
@@ -220,7 +235,7 @@ function App() {
         <footer>
           <p>Copyright © 2024 LYCA 保留一切權利。</p>
           <div className='footer-linkbox'>
-            <a>官方網站</a>
+            <a href='https://lyhsca.org'>官方網站</a>
             <a>聯絡我們</a>
             <a>學權信箱</a>
           </div>
@@ -244,6 +259,7 @@ function App() {
                 <Route path='/account/*' element={<Menbercenter />}></Route>
                 <Route path='/online-voting' element={<OnVote />}></Route>
                 <Route path='/ADregister' element={<Register />}></Route>
+                <Route path='/Admin/*' element={<Admin />}></Route>
               </Routes>
             </div>
             <Footer />

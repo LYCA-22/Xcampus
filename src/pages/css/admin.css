@@ -1,0 +1,34 @@
+/** 功能區 **/
+.funbox{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 20px 10px 20px;
+}
+.funbox_title{
+    padding: 15px 5px 5px 25px;
+    font-family: Inter, system-ui;
+    font-weight: 500;
+    border-top: 1px solid #e8e8e8;
+    margin: 0;
+}
+.admin_funbtn{
+    display: flex;
+    padding: 20px;
+    border: 2px solid #cdcdcd;
+    color: #1c1c1c;
+    text-decoration: none;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    align-content: center;
+    align-items: center;
+    margin: 5px;
+    font-size: 18px;
+    border-radius: 15px;
+    transition: background-color 0.2s ease-in-out;
+}
+.admin_funbtn:hover{
+    background-color: #eaeaea;
+}
+.funbtn_svg{
+    margin: 10px 10px 10px 0px;
+}

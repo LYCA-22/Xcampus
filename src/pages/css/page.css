@@ -12,6 +12,10 @@
     font-weight: 500;
     margin-top: 5px;
 }
+svg.IsinPage{
+    color: white;
+}
+
 
 /** 進度查詢 **/
 .ftb_title{
@@ -528,6 +532,19 @@
     font-weight: 500;
     font-size: 14px;
     margin: 5px;
+}
+/** 訊息視窗關閉按鈕 **/
+.close_box_btn{
+    background-color: white;
+    padding: 10px 15px 10px 15px;
+    font-family: Inter, system-ui;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 100px;
+    border: 1px solid #cdcdcd;
+}
+.close_box_btn:hover{
+    background-color: #cdcdcd;
 }
 
 /** 校園公告 **/

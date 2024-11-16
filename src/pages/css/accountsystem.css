@@ -227,8 +227,8 @@ input:focus{
     font-weight: 600;
     width: 100%;
     color: #000;
-    margin: 0px;
     margin: 10px;
+    font-family: Inter, system-ui, sans-serif;
 }
 .acc_top_formtext{
     margin: 0px;
@@ -268,7 +268,7 @@ input:focus{
     font-size: 15px;
     margin: 0px;
     margin-right: auto;
-    font-family: NotoSansTC;
+    font-family: Inter, system-ui, sans-serif;
     font-weight: 500;
     color: #757575;
     margin-left: 10px;
@@ -283,7 +283,7 @@ input:focus{
     width: 100%;
     text-decoration: none;
     color: #4d4d4d;
-    font-family: NotoSansTC;
+    font-family: Inter, system-ui, sans-serif;
     font-weight: 500;
     box-sizing: border-box;
     border-radius: 16px;
@@ -325,7 +325,7 @@ input:focus{
     text-decoration: none;
     padding: 10px;
     color: #a1a1a1;
-    font-family: NotoSansTC;
+    font-family: Inter, system-ui, sans-serif;
     font-weight: 500;
     margin-left: 10px;
     margin-right: 10px;

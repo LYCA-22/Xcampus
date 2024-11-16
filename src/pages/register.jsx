@@ -52,13 +52,28 @@ function Register() {
         }
     }, [adac, loading, message]);
 
+    const closebox = () => {
+        const loadingbox = document.getElementById('loadingbox');
+        const mainbox = document.getElementById('mainbox');
+        loadingbox.classList.remove('fadeIn')
+        loadingbox.classList.add('hidden')
+        setTimeout(() => {
+            mainbox.classList.remove('show')
+            mainbox.classList.add('fade')
+            loadingbox.classList.remove('show')
+            loadingbox.classList.remove('fadeIn')
+        },200)
+    }
+
 
     const Loadingbox = () => {
-        if (loading === false && message != '') {
+        if (loading === false && message !== '') {
             return (
                 <div className="loadingbox hidden" id="loadingbox">
                     <div className="mainbox fade" id="mainbox">
-                        <h3>{message}</h3>
+                        <h3 style={{margin:'0'}}>系統通知</h3>
+                        <p>{message}</p>
+                        <button className='close_box_btn' onClick={closebox}>關閉</button>
                     </div>
                 </div>
             );
@@ -205,6 +220,8 @@ function Register() {
                                 <CMenuItem value='R15'>活動</CMenuItem>
                                 <CMenuItem value='R16'>公關</CMenuItem>
                                 <CMenuItem value='R17'>美宣</CMenuItem>
+                                <CMenuItem value='R08'>文書</CMenuItem>
+                                <CMenuItem value='R09'>事務</CMenuItem>
                             </Select>
                         </CFormControl>
                         <span className="reg_line"></span>
