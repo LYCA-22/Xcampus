@@ -3,7 +3,7 @@ import { app, auth, analytics, onAuthStateChanged, CheckAuth } from "./firebase"
 import { BrowserRouter as Router, Route, Routes, Link, useLocation, BrowserRouter, useNavigate, Navigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 import './css/accountsystem.css'
-import logo from './assets/applogo_noback.png'
+import logo from './assets/web_logo.svg'
 import loadingGIF from './assets/loadingGIF.gif'
 import { TextField, InputLabel } from "@mui/material";
 
