@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     const [userRole, setUserRole] = useState('');
     const [userLevel, setUserLevel] = useState('');
     const [loading, setLoading] = useState(true)
+    const IsBeta = import.meta.env.VITE_IS_MODE === 'true';
 
     useEffect(() => {
         const token = getCookie("token"); // 獲取 cookie 中的 token
@@ -85,7 +86,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, userName, userEmail, userClass, adminAccess, userGrade, userID, loading, userRole, logoutUser, userLevel }}>
+        <AuthContext.Provider value={{ user, userName, userEmail, userClass, adminAccess, userGrade, userID, loading, userRole, logoutUser, userLevel, IsBeta }}>
             {children}
         </AuthContext.Provider>
     );

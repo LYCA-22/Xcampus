@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Link, useLocation, BrowserRoute
 // Import the functions you need from the SDKs you need
 import { register } from './serviceWorkerRegistration';
 import logo from './pages/assets/applogo_noback.png'
-import loadingGIF from './pages/assets/loadingGIF.gif'
 import { useAuth } from './AuthContext';
 
 /* 頁面 */
@@ -20,20 +19,9 @@ import Admin  from "./pages/Admin.jsx";
 import { HomeIcon, NewsIcon, ProposalIcon, McIcon } from './icons/Graphic control'
 import './App.css';
 
-function LoadingBox() {
-  return (
-      <div className="loadingbox hidden" id="loadingbox">
-          <div className="mainbox fade" id="mainbox">
-              <h3>登出中</h3>
-              <img src={loadingGIF} className="gif" id="loadingGIF"></img>
-          </div>
-      </div>
-  )
-}
-
 //側邊欄
 function SideBar(){
-  const { adminAccess, user, logoutUser } = useAuth()
+  const { adminAccess, user, logoutUser, IsBeta } = useAuth()
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -68,6 +56,7 @@ function SideBar(){
   }
 
   const logout = () => {
+
     logoutUser();
     setTimeout(() => {
       window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.xcp.lyhsca.org';
@@ -77,7 +66,12 @@ function SideBar(){
   return (
     <div className={currentPath === '/login' ? 'displaynone':'show'}>
       <nav className='sidebar open' id='sidebar'>
-        <img src={logo} className='applogo'></img>
+        <div className='logobox'>
+          <img src={logo} className='applogo'></img>
+          {IsBeta &&
+              <p>BETA</p>
+          }
+        </div>
         <Link to="/">
           <div className={currentPath === '/' ? 'isin sidebtn':'sbtn sidebtn'}>
             <HomeIcon />
@@ -136,7 +130,6 @@ function SideBar(){
 }
 
 function Mobliebar(){
-  const location = useLocation();
   const currentPath = window.location.pathname;
 
   return (
@@ -188,7 +181,7 @@ function Mobliebar(){
 
 
 function App() {
-  const {user, loading} = useAuth()
+  const {IsBeta, user, loading} = useAuth()
 
   const CheckUser = () => {
     if (user === true && loading !== true) {
@@ -202,10 +195,7 @@ function App() {
   useEffect(() => {
     CheckUser();
     register();
-    console.log(import.meta.env)
-    const isBeta = import.meta.env.VITE_IS_MODE === 'true';
-    console.log(isBeta)
-    if (isBeta) {
+    if (IsBeta) {
       console.log('This is the Beta version!');
     } else {
       console.log('This is the Stable version!');
@@ -230,7 +220,7 @@ function App() {
 
 
     window.addEventListener('resize', handleResize);
-  }, [user, loading]);
+  }, [user, loading, IsBeta]);
 
   const Footer = () => {
     return(
