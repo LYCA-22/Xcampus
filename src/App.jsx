@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation, BrowserRouter, useNavigate, Navigate } from 'react-router-dom';
 // Import the functions you need from the SDKs you need
 import { register } from './serviceWorkerRegistration';
-import logo from './pages/assets/applogo_noback.png'
+import logo from './pages/assets/web_logo.svg'
 import { useAuth } from './AuthContext';
 
 /* 頁面 */
