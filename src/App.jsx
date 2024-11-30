@@ -130,7 +130,8 @@ function SideBar(){
 }
 
 function Mobliebar(){
-  const currentPath = window.location.pathname;
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
     <div className={currentPath === '/login' ? 'displaynone':'moblieshow'}>
