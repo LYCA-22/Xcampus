@@ -202,7 +202,9 @@ function App() {
   useEffect(() => {
     CheckUser();
     register();
-    const isBeta = import.meta.env.VITE_IS_BETA === 'true';
+    console.log(import.meta.env)
+    const isBeta = import.meta.env.VITE_IS_MODE === 'true';
+    console.log(isBeta)
     if (isBeta) {
       console.log('This is the Beta version!');
     } else {
