@@ -8,7 +8,7 @@ function Register() {
     const {userLevel} = useAuth()
     const [adminAccess, setAdminAccess] = useState(false);
     useEffect(() => {
-        document.title = 'LIP 內部帳號註冊'
+        document.title = 'Xcampus 內部帳號註冊'
         // 檢測用戶層級是否可以創建帳號
         if (userLevel === 'L04') {
             setAdminAccess(true);
@@ -178,12 +178,12 @@ function Register() {
     }
 
     return(
-        <>
+        <section>
             <Loadingbox />
             {!adminAccess ? <h1 className="sitetitle">權限不足</h1>:
                 <div>
                     <div className="reg_titlebox">
-                        <h1 className="sitetitle" id="reg_sitetitle">LIP 內部帳號註冊</h1>
+                        <h1 className="sitetitle" id="reg_sitetitle">Xcampus 內部帳號註冊</h1>
                         <p className="type_text">限幹部</p>
                     </div>
                     <form className="reg_formbox" id="reg_formbox" onSubmit={regAuth}>
@@ -251,7 +251,7 @@ function Register() {
                     </form>
                 </div>
             }
-        </>
+        </section>
     )
 }
 

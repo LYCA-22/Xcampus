@@ -1,20 +1,57 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './css/page.css'
 import './css/admin.css'
 import { useAuth } from '../AuthContext';
 import {Link} from "react-router-dom";
 
 function Admin() {
-    const { user, userName, adminAccess, loading, userLevel } = useAuth()
+    const { userName, adminAccess, loading, userLevel } = useAuth()
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef(null); // 用于获取菜单元素的引用
+
+    const handleOutsideClick = (e) => {
+        // 如果点击的目标不是菜单本身或菜单的子元素，则关闭菜单
+        if (menuRef.current && !menuRef.current.contains(e.target)) {
+            setMenuOpen(false);
+        }
+    };
 
     useEffect(() => {
         document.title = 'Xcampus 管理中心';
-    }, []);
+        document.addEventListener('click', handleOutsideClick);
+
+        // 清理事件监听器
+        return () => {
+            document.removeEventListener('click', handleOutsideClick);
+        };
+    }, [menuOpen]);
 
     if (adminAccess){
         return (
             <section>
-                <h1 className="sitetitle" >Xcampus 管理中心</h1>
+                <nav className='admin_nav'>
+                    <h1 className="sitetitle">Xcampus 管理中心</h1>
+                    <div className='userInf' ref={menuRef}>
+                        <button className='userInf_Btn' onClick={() => setMenuOpen((prev) => !prev)}>
+                            <div className="userIcon">
+                                <p className='userNa'>
+                                    {userName && userName.toString().split(' ').length > 1
+                                        ? userName.split(' ')[0][0] + userName.split(' ')[1][0]
+                                        : userName[0] || ''}
+                                </p>
+                            </div>
+                            {userName}
+                        </button>
+                        {menuOpen &&
+                            <div className='user_Mdiv open' >
+                                <div>用戶等級 {userLevel}</div>
+                                <Link to='/account' className='admin_navBtn'>
+                                    <p className='menu_p'>管理我的帳戶</p>
+                                </Link>
+                            </div>
+                        }
+                    </div>
+                </nav>
                 <div className="funbox">
                     <Link to="/ADregister" className='admin_funbtn' id='addnewsBtn'>
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
@@ -24,9 +61,9 @@ function Admin() {
                         </svg>
                         發佈公告
                     </Link>
-                    { userLevel === 'L04' &&
+                    {userLevel === 'L04' &&
                         <Link to="/ADregister" className='admin_funbtn'>
-                            <svg width="26" height="26"  viewBox="0 0 24 24" fill="none"
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg" className='funbtn_svg'>
                                 <path
                                     d="M3 20C5.33579 17.5226 8.50702 16 12 16C15.493 16 18.6642 17.5226 21 20M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"

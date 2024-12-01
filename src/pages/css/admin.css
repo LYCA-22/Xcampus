@@ -1,3 +1,70 @@
+/** 導覽列 **/
+.admin_nav{
+    display: flex;
+}
+.userInf{
+    margin-left: auto;
+}
+.userInf_Btn{
+    margin: 15px 15px 15px 15px;
+    padding: 5px 10px 5px 10px;
+    font-family: Inter, system-ui;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+.userInf_Btn:hover{
+    background-color: #e8e8e8;
+}
+.userIcon{
+    background-color: #0084ff;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 5px 10px 5px 0;
+}
+.userNa{
+    font-family: Inter, system-ui;
+    font-size: 12px;
+    color: white;
+}
+
+/** 用戶資訊選單 **/
+.user_Mdiv{
+    display: none;
+    position: absolute;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #e4e4e4;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 5px 3px #ededed;
+    font-family: Inter, system-ui;
+    font-weight: 500;
+}
+.user_Mdiv.open{
+    display: flex;
+    flex-direction: column;
+}
+.admin_navBtn{
+    background-color: #e8e8e8;
+    border-radius: 100px;
+    display: block;
+    margin-top: 10px;
+    padding: 10px 15px 10px 15px;
+    text-decoration: none;
+    color: #1c1c1c;
+}
+.admin_navBtn p{
+    margin: 0;
+}
 /** 功能區 **/
 .funbox{
     display: flex;

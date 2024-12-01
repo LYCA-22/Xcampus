@@ -88,55 +88,6 @@ const ACHome = () => {
         fontFamily: 'NotoSansTC',
         fontWeight: '500',
     }))
-    const NormalButton = styled(Button)(({theme}) => ({
-        borderRadius: '10px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        justifyItems: 'center',
-        backgroundColor: 'transparent',
-        border: '2px solid #dfdfdf',
-        padding: '10px',
-        color: '#1c1c1c',
-        fontFamily: 'NotoSansTC',
-        fontWeight: '500',
-        fontSize: '15px',
-        width: '100%',
-        margin: '10px',
-        height: '45px',
-        transition: 'background-color 0.2s ease-in-out, border 0.2s ease-in-out, transform 0.2s ease-in-out',
-        ':hover':{
-            backgroundColor: '#dfdfdf4c',
-        },
-        ':disabled':{
-            border: '2px solid #dfdfdf',
-        }
-    }))
-    const LogOutButton = styled(Button)(({theme}) => ({
-        borderRadius: '10px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        justifyItems: 'center',
-        backgroundColor: '#c64f4f',
-        border: 'none',
-        padding: '10px',
-        color: 'white',
-        fontFamily: 'NotoSansTC',
-        fontWeight: '500',
-        fontSize: '15px',
-        width: '100%',
-        margin: '10px',
-        height: '45px',
-        transition: 'background-color 0.2s ease-in-out, border 0.2s ease-in-out, transform 0.2s ease-in-out',
-        ':hover':{
-            backgroundColor: '#9b3d3d',
-        },
-        ':disabled':{
-            border: '2px solid #dfdfdf',
-        }
-    }))
-
     const class_all = {
         C01: '忠',
         C02: '孝',
@@ -179,7 +130,7 @@ const ACHome = () => {
 
 
     return (
-        <>
+        <section>
             <h1 className="acc_top_formtitle" id="mctitle">帳戶</h1>
             <p className="acc_top_formtext" id="mctitle">管理你的基本資料</p>
             <div className="userCard">
@@ -326,7 +277,7 @@ const ACHome = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#828282"><path d="m320.23-107.69-42.54-42.54L607.46-480 277.69-809.77l42.54-42.54L692.54-480 320.23-107.69Z"/></svg>
                 </button>
             </div>
-        </>
+        </section>
     );
 }
 
