@@ -8,27 +8,33 @@
     padding: 15px 5px 5px 25px;
     font-family: Inter, system-ui;
     font-weight: 500;
-    border-top: 1px solid #e8e8e8;
     margin: 0;
 }
 .admin_funbtn{
     display: flex;
+    flex-direction: column;
     padding: 20px;
-    border: 2px solid #cdcdcd;
+    border: 1px solid #e3e3e3;
     color: #1c1c1c;
     text-decoration: none;
     font-family: Inter, sans-serif;
     font-weight: 500;
-    align-content: center;
-    align-items: center;
-    margin: 5px;
-    font-size: 18px;
-    border-radius: 15px;
+    margin: 10px;
+    font-size: 15px;
+    border-radius: 20px;
     transition: background-color 0.2s ease-in-out;
+    min-width: 150px;
 }
 .admin_funbtn:hover{
-    background-color: #eaeaea;
+    background-color: #f1f1f1;
 }
 .funbtn_svg{
-    margin: 10px 10px 10px 0px;
+    margin: 0 0 10px 0;
+}
+#addnewsBtn{
+    background-color: #1c1c1c;
+    color: #fff;
+}
+#addnewsBtn:hover{
+    background-color: #4c4c4c;
 }

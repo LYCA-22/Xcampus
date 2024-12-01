@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation, BrowserRouter, useNavigate, Navigate } from 'react-router-dom';
 // Import the functions you need from the SDKs you need
 import { register } from './serviceWorkerRegistration';
-import logo from './pages/assets/web_logo.svg'
+import logo from './pages/assets/logo.png'
 import { useAuth } from './AuthContext';
 
 /* 頁面 */
@@ -27,7 +27,6 @@ function SideBar(){
 
   function changemenu(){
     var Nav = document.getElementById('sidebar')
-    var btn = document.getElementById('changemenu')
     var btn_p = document.querySelectorAll('.link_p')
     if (Nav.classList.contains('open')){
       btn_p.forEach((link_a) => {
@@ -35,23 +34,14 @@ function SideBar(){
       })
       Nav.classList.remove('open')
       Nav.classList.add('close')
-      btn.classList.remove('normal')
-      setTimeout(() => {
-        btn.classList.add('open')
-      }, 200)
-
-
     } else if (Nav.classList.contains('close')){
       Nav.classList.add('open')
       Nav.classList.remove('close')
-      btn.classList.add('normal')
       setTimeout(()=>{
-        btn.classList.remove('open')
         btn_p.forEach((link_a) => {
           link_a.classList.remove('hidden')
         })
       },200)
-      
     }
   }
 
@@ -97,19 +87,19 @@ function SideBar(){
           </div>
         </Link>
         <div className='ftbox'>
-          <span className='ftbox_line'></span>
           {adminAccess && (
-            <Link to='/admin' id='btn_adcenter'>
-              <div className={currentPath === '/admin' ? 'isin sidebtn' : 'sbtn sidebtn'}>
-                <svg width="26" height="26" viewBox="0 0 24 24" fill={currentPath === '/admin' ? '#2b2b2b' : "none"} xmlns="http://www.w3.org/2000/svg">
-                  <path
-                      d="M11.223 2.43177C11.5066 2.27421 11.6484 2.19543 11.7985 2.16454C11.9315 2.13721 12.0685 2.13721 12.2015 2.16454C12.3516 2.19543 12.4934 2.27421 12.777 2.43177L20.177 6.54288C20.4766 6.70928 20.6263 6.79248 20.7354 6.91082C20.8318 7.01551 20.9049 7.13959 20.9495 7.27477C21 7.42756 21 7.59889 21 7.94153V16.0586C21 16.4013 21 16.5726 20.9495 16.7254C20.9049 16.8606 20.8318 16.9847 20.7354 17.0893C20.6263 17.2077 20.4766 17.2909 20.177 17.4573L12.777 21.5684C12.4934 21.726 12.3516 21.8047 12.2015 21.8356C12.0685 21.863 11.9315 21.863 11.7985 21.8356C11.6484 21.8047 11.5066 21.726 11.223 21.5684L3.82297 17.4573C3.52345 17.2909 3.37369 17.2077 3.26463 17.0893C3.16816 16.9847 3.09515 16.8606 3.05048 16.7254C3 16.5726 3 16.4013 3 16.0586V7.94153C3 7.59889 3 7.42756 3.05048 7.27477C3.09515 7.13959 3.16816 7.01551 3.26463 6.91082C3.37369 6.79248 3.52345 6.70928 3.82297 6.54288L11.223 2.43177Z"
-                      stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+              <Link to='/admin' id='btn_adcenter'>
+                <div className={currentPath === '/admin' ? 'isin sidebtn' : 'sbtn sidebtn'}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill={currentPath === '/admin' ? '#2b2b2b' : "none"}
+                       xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M11.223 2.43177C11.5066 2.27421 11.6484 2.19543 11.7985 2.16454C11.9315 2.13721 12.0685 2.13721 12.2015 2.16454C12.3516 2.19543 12.4934 2.27421 12.777 2.43177L20.177 6.54288C20.4766 6.70928 20.6263 6.79248 20.7354 6.91082C20.8318 7.01551 20.9049 7.13959 20.9495 7.27477C21 7.42756 21 7.59889 21 7.94153V16.0586C21 16.4013 21 16.5726 20.9495 16.7254C20.9049 16.8606 20.8318 16.9847 20.7354 17.0893C20.6263 17.2077 20.4766 17.2909 20.177 17.4573L12.777 21.5684C12.4934 21.726 12.3516 21.8047 12.2015 21.8356C12.0685 21.863 11.9315 21.863 11.7985 21.8356C11.6484 21.8047 11.5066 21.726 11.223 21.5684L3.82297 17.4573C3.52345 17.2909 3.37369 17.2077 3.26463 17.0893C3.16816 16.9847 3.09515 16.8606 3.05048 16.7254C3 16.5726 3 16.4013 3 16.0586V7.94153C3 7.59889 3 7.42756 3.05048 7.27477C3.09515 7.13959 3.16816 7.01551 3.26463 6.91082C3.37369 6.79248 3.52345 6.70928 3.82297 6.54288L11.223 2.43177Z"
+                        stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
 
-                <p className='link_p'>管理中心</p>
-              </div>
-            </Link>)}
+                  <p className='link_p'>管理中心</p>
+                </div>
+              </Link>)}
           <button className='ft_btn' id='btn_logout' onClick={logout}>
             <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px"
                  fill="rgba(124, 124, 124, 0.745)">
@@ -118,28 +108,31 @@ function SideBar(){
             </svg>
             {user ? <p className='link_p'>登出</p> : <p className='link_p'>登入</p>}
           </button>
+          <button className='sidechangebtn normal' id='changemenu' onClick={changemenu}>
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                  d="M17.5 11H12.5M17.5 15H12.5M17.5 7H12.5M9 3L9 21M7.8 3H16.2C17.8802 3 18.7202 3 19.362 3.32698C19.9265 3.6146 20.3854 4.07354 20.673 4.63803C21 5.27976 21 6.11984 21 7.8V16.2C21 17.8802 21 18.7202 20.673 19.362C20.3854 19.9265 19.9265 20.3854 19.362 20.673C18.7202 21 17.8802 21 16.2 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V7.8C3 6.11984 3 5.27976 3.32698 4.63803C3.6146 4.07354 4.07354 3.6146 4.63803 3.32698C5.27976 3 6.11984 3 7.8 3Z"
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
       </nav>
-      <button className='sidechangebtn normal' id='changemenu' onClick={changemenu}>
-        <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="#34495D">
-          <path
-              d="M504-480 348-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L404-268q-11 11-28 11t-28-11q-11-11-11-28t11-28l156-156Z"/></svg>
-      </button>
+
     </div>
   )
 }
 
-function Mobliebar(){
+function Mobliebar() {
   const location = useLocation();
   const currentPath = location.pathname;
 
   return (
-    <div className={currentPath === '/login' ? 'displaynone':'moblieshow'}>
-      <nav className='mobliebar' >
-        <Link to="/" className={currentPath === '/' ? 'navbtn-active':''}>
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M8.12602 14C8.57006 15.7252 10.1362 17 12 17C13.8638 17 15.4299 15.7252 15.874 14M11.0177 2.764L4.23539 8.03912C3.78202 8.39175 3.55534 8.56806 3.39203 8.78886C3.24737 8.98444 3.1396 9.20478 3.07403 9.43905C3 9.70352 3 9.9907 3 10.5651V17.8C3 18.9201 3 19.4801 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4801 21 18.9201 21 17.8V10.5651C21 9.9907 21 9.70352 20.926 9.43905C20.8604 9.20478 20.7526 8.98444 20.608 8.78886C20.4447 8.56806 20.218 8.39175 19.7646 8.03913L12.9823 2.764C12.631 2.49075 12.4553 2.35412 12.2613 2.3016C12.0902 2.25526 11.9098 2.25526 11.7387 2.3016C11.5447 2.35412 11.369 2.49075 11.0177 2.764Z"
+      <div className={currentPath === '/login' ? 'displaynone' : 'moblieshow'}>
+        <nav className='mobliebar'>
+          <Link to="/" className={currentPath === '/' ? 'navbtn-active' : ''}>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                  d="M8.12602 14C8.57006 15.7252 10.1362 17 12 17C13.8638 17 15.4299 15.7252 15.874 14M11.0177 2.764L4.23539 8.03912C3.78202 8.39175 3.55534 8.56806 3.39203 8.78886C3.24737 8.98444 3.1396 9.20478 3.07403 9.43905C3 9.70352 3 9.9907 3 10.5651V17.8C3 18.9201 3 19.4801 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4801 21 18.9201 21 17.8V10.5651C21 9.9907 21 9.70352 20.926 9.43905C20.8604 9.20478 20.7526 8.98444 20.608 8.78886C20.4447 8.56806 20.218 8.39175 19.7646 8.03913L12.9823 2.764C12.631 2.49075 12.4553 2.35412 12.2613 2.3016C12.0902 2.25526 11.9098 2.25526 11.7387 2.3016C11.5447 2.35412 11.369 2.49075 11.0177 2.764Z"
                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </Link>
@@ -243,7 +236,6 @@ function App() {
         <main>
           <SideBar />
           <div className='section'>
-            <div>
               <Routes baseName='/'>
                 <Route path='/' element={<Index />}></Route>
                 <Route path='/announcement' element={<Announcement />}></Route>
@@ -254,8 +246,6 @@ function App() {
                 <Route path='/ADregister' element={<Register />}></Route>
                 <Route path='/Admin/*' element={<Admin />}></Route>
               </Routes>
-            </div>
-            <Footer />
           </div>
         </main>
       </Router>

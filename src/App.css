@@ -1,27 +1,19 @@
 #root {
   margin: 0;
-  font-family: NotoSansTC;
+  font-family: NotoSansTC, system-ui;
 }
 
 body{
-  margin: 0px;
-  padding: 0px;
-  background-image: url(./pages/assets/backimage.jpg);
-  background-size: contain;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
   height: 100lvh;
 }
 
 main{
   display: flex;
   height: 100lvh;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  background-color: #edededb4;
   overflow-y: auto;
-}
-
-main.theme-dark{
-  background-color: #38383897;
 }
 
 .displaynone{
@@ -107,6 +99,7 @@ button, a{
   font-weight: 500;
   display: block;
   background-color: rgba(255, 255, 255, 0.83);
+  border: 1px solid #cfcfcf;
   padding: 5px 10px 5px 10px;
   border-radius: 100px;
   font-size: 14px;
@@ -148,45 +141,25 @@ nav.close{
 }
 
 /** 側邊欄按鈕 **/
-
 .sidechangebtn{
-  background-color: rgb(251, 251, 251);
+  background-color: transparent;
   border-radius: 100px;
-  border: 0px;
-  padding: 5px;
+  border: none;
+  padding: 10px;
+  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   justify-items: center;
-  position: fixed;
-  z-index: 1000;
-  bottom: 20px;
-  left: 25px;
-  transition: background-color 0.2s ease-in-out, transfrom 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
   color: #000;
 }
-.sidechangebtn.theme-dark{
-  background-color: rgb(106, 106, 106);
-  color: #000;
-}
-.sidechangebtn.theme-dark svg{
-  fill: rgb(255, 255, 255);
-}
-.sidechangebtn.normal{
-  transform: rotate(180deg);
-  transition: transfrom 0.2s ease-in-out;
-}
-.sidechangebtn.open{
-  transform: rotate(0deg);
-  transition: transfrom 0.2s ease-in-out;
+.sidechangebtn svg{
+    color: #7e7e7e;
 }
 .sidechangebtn:hover{
   background-color: #ecebeb;
 }
-.sidechangebtn.theme-dark:hover{
-  background-color: #454545;
-}
-
 .sidebar a{
   text-decoration: none;
   display: flex;
@@ -239,7 +212,6 @@ nav.close{
 }
 
 .ftbox{
-  margin-bottom: 55px;
   margin-top: auto;
   box-sizing: border-box;
   position: relative;
@@ -274,28 +246,32 @@ nav.close{
 @media (min-width:100px) {
   .section{
     box-shadow: none;
-    border-radius: 0px;
-    margin: 0px;
-    box-sizing: border-box;
+    border-radius: 0;
+    margin: 0;
   }
 }
 @media (min-width:500px) {
   .section{
-    box-shadow: 0px 0px 20px 3px #51515117;
-    border-radius: 30px;
-    margin: 15px;
+    box-shadow: 0 0 5px 2px #ededed;
+    border-radius: 30px 30px 0 0;
+    margin: 15px 15px 0 15px;
     box-sizing: border-box;
   }
 }
 .section{
   width: 100%;
   background-color: rgb(255, 255, 255);
-  overflow-y: auto;
   position: relative;
-  box-sizing: border-box;
+  overflow: hidden;
 }
 .section.theme-dark{
   background-color: rgb(57, 57, 57);
+}
+
+section{
+  overflow: auto;
+  height: 100%;
+  position: relative;
 }
 
 /** Footer **/
