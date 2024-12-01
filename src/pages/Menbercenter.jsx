@@ -130,7 +130,7 @@ const ACHome = () => {
 
 
     return (
-        <section>
+        <>
             <h1 className="acc_top_formtitle" id="mctitle">帳戶</h1>
             <p className="acc_top_formtext" id="mctitle">管理你的基本資料</p>
             <div className="userCard">
@@ -277,7 +277,7 @@ const ACHome = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#828282"><path d="m320.23-107.69-42.54-42.54L607.46-480 277.69-809.77l42.54-42.54L692.54-480 320.23-107.69Z"/></svg>
                 </button>
             </div>
-        </section>
+        </>
     );
 }
 
@@ -393,7 +393,7 @@ const ChangePassword = () => {
 
 
     return (
-        <>  
+        <>
             <Link to='/account/security' className="backbtn">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000">
                     <path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z"/>
@@ -415,7 +415,7 @@ const Menbercenter = () => {
     const currentPath = window.location.pathname;
 
     return (
-        <>
+        <section>
             <LoadingBox />
             <div className="mcbox">
                 <div className="acc_phone_nav">
@@ -466,7 +466,7 @@ const Menbercenter = () => {
                     </Routes>
                 </div>
             </div>
-        </>
+        </section>
     )
 }
 

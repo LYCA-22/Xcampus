@@ -1,6 +1,39 @@
+/** 整體設計 **/
+/** 設定字體漸層變化 **/
+@keyframes gradient-shift {
+    0% {
+        background-position: 0 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+#admin_title{
+    margin-top: 0;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b, #86a8e7, #9c60e6);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 5s infinite alternate;
+    font-size: 30px;
+}
+.admin_contentbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
 /** 導覽列 **/
 .admin_nav{
     display: flex;
+    width: 100%;
+    position: absolute;
+    top: 0;
 }
 .userInf{
     margin-left: auto;
@@ -66,10 +99,24 @@
     margin: 0;
 }
 /** 功能區 **/
+.admin_p_text{
+    font-family: Inter, system-ui;
+    font-size: 15px;
+    color: #b0b0b0;
+    font-weight: 450;
+}
 .funbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.funbox-intobox{
     display: flex;
     flex-wrap: wrap;
     margin: 0 20px 10px 20px;
+    align-items: center;
+    justify-content: center;
 }
 .funbox_title{
     padding: 15px 5px 5px 25px;
@@ -104,4 +151,11 @@
 }
 #addnewsBtn:hover{
     background-color: #4c4c4c;
+}
+#adduserBtn{
+    border: 1px dashed #e4e4e4;
+}
+#adduserBtn:hover{
+    border: 1px dashed #99afd1;
+    background-color: #e9f5ff;
 }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './css/page.css'
-import { useLocation, useNavigate } from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { TextField, Select, MenuItem, FormControl, InputLabel, Menu, Button, styled, Switch } from "@mui/material";
 import { useAuth } from '../AuthContext';
 
@@ -183,6 +183,11 @@ function Register() {
             {!adminAccess ? <h1 className="sitetitle">權限不足</h1>:
                 <div>
                     <div className="reg_titlebox">
+                        <Link to='/admin'>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000">
+                                <path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z"/>
+                            </svg>
+                        </Link>
                         <h1 className="sitetitle" id="reg_sitetitle">Xcampus 內部帳號註冊</h1>
                         <p className="type_text">限幹部</p>
                     </div>
