@@ -111,7 +111,7 @@ function Admin() {
                                 </svg>
                                 投票管理
                             </Link>
-                            <Link to="/admin" className='admin_funbtn'>
+                            <Link to="https://doc.lyhsca.org" className='admin_funbtn'>
                                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg" className='funbtn_svg'>
                                     <path
