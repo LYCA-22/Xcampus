@@ -182,14 +182,15 @@ function Register() {
             <Loadingbox />
             {!adminAccess ? <h1 className="sitetitle">權限不足</h1>:
                 <div>
-                    <div className="reg_titlebox">
-                        <Link to='/admin'>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000">
-                                <path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z"/>
+                    <div className="reg_titleBox">
+                        <Link to='/admin' className='Back_Btn'>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg" color='#000'>
+                                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" strokeWidth="2"
+                                      strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </Link>
-                        <h1 className="sitetitle" id="reg_sitetitle">Xcampus 內部帳號註冊</h1>
-                        <p className="type_text">限幹部</p>
+                        <h1 className="sitetitle" id="reg_siteTitle">Xcampus 內部帳號註冊</h1>
                     </div>
                     <form className="reg_formbox" id="reg_formbox" onSubmit={regAuth}>
                         <TextField id='name' label="姓名" type="text" required onChange={(e) => setName(e.target.value)} fullWidth variant="filled" sx={{margin: '10px', maxWidth: '500px', '.MuiInputBase-root': {borderRadius: '10px', border: '1px solid #e5e5e5', backgroundColor: 'transparent'}, '.Mui-focused input': {backgroundColor: 'transparent'}, '.MuiInputBase-root::after, .MuiInputBase-root::before, .MuiInputBase-root:hover::before': {borderBottomWidth: '0px'}, '.MuiInputBase-root::before': {borderBottomWidth: '0px'}, '.MuiInputBase-input, .MuiFormLabel-root': {fontFamily: 'NotoSansTC',fontWeight: '500',},'.MuiFilledInput-root': {borderTopRightRadius: '10px',borderTopLeftRadius: '10px',},'.MuiFilledInput-underline::before': {borderBottomColor: '#e5e5e5'}}}/>

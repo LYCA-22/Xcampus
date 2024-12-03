@@ -457,25 +457,29 @@ svg.IsinPage{
 
 
 /** 帳號註冊 **/
-.reg_titlebox{
+.Back_Btn{
+    position: absolute;
+    left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    padding: 10px;
+    border-radius: 50px;
+
+}
+.Back_Btn:hover{
+    background: #e1e1e1;
+}
+.reg_titleBox{
     display: flex;
     align-items: center;
     justify-items: center;
     justify-content: center;
     margin-top: 20px;
 }
-#reg_sitetitle{
-    margin-left: 0px;
-}
-.type_text{
-    background-color: #327dff;
-    color: white;
-    padding: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    border-radius: 100px;
-    font-family: NotoSansTC;
-    font-weight: 550;
+#reg_siteTitle{
+    margin-left: 0;
 }
 .reg_formbox{
     box-sizing: border-box;

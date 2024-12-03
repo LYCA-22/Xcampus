@@ -5,9 +5,7 @@ input{
     background-color: transparent;
     border: none;
     width: 100%;
-    -webkit-font-family: NotoSansTC;
-    font-family: NotoSansTC;
-    -webkit-font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 16px;
     padding: 5px;
@@ -27,9 +25,7 @@ input:focus{
     padding-top: 25px;
     padding-left: 10px;
     padding-right: 10px;
-    -webkit-font-family: NotoSansTC;
-    font-family: NotoSansTC;
-    -webkit-font-weight: 500;
+    font-family: Inter, system-ui;
     font-weight: 400;
     font-size: 16px;
     border: none;
@@ -72,7 +68,7 @@ input:focus{
     position: absolute;
     left: 20px;
     top: 32%;
-    font-family: NotoSansTC;
+    font-family: Inter, system-ui;
     font-weight: 500;
     font-size: 15px;
     color: #1c1c1c;
@@ -83,14 +79,14 @@ input:focus{
     position: absolute;
     left: 10px;
     top: 15%;
-    font-family: NotoSansTC;
+    font-family: Inter, system-ui;
     font-weight: 500;
     font-size: 12px;
     transition: top 0.1s ease-in-out, left 0.1s ease-in-out, font-size 0.1s ease-in-out;
 }
 .line{
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
     transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
 }
 .line.active{
@@ -98,7 +94,7 @@ input:focus{
     height: 2px;
     background-color: #0365c6;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     border-radius: 100px;
     z-index: 2;
     display: block;
@@ -175,17 +171,19 @@ input:focus{
     font-size: 24px;
     color: #000;
 }
-.mcbox{
+/** 總容器（包含側邊欄以及頁面） **/
+.main_box{
     position: relative;
     display: flex;
     box-sizing: border-box;
     justify-content: center;
-    background-color: #ececec66;
+    height: 100%;
+    user-select: none;
 }
-.mcform{
+/** 頁面容器 **/
+.page_content{
     display: flex;
     position: relative;
-    padding: 15px;
     justify-content: center;
     justify-items: center;
     align-items: center;
@@ -194,35 +192,58 @@ input:focus{
     border-radius: 15px;
     box-sizing: border-box;
     margin: 10px;
-    background-color: white;
+    background-color: #ececec66;
 }
 #se_mcbox{
     margin-top: 20px;
 }
+.contentBox{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/** 依據視窗大小調整 **/
 @media (min-width:100px) {
-    .mcbox{
-        padding: 30px;
+    .main_box{
+        padding: 30px 30px 0 30px;
     }
-    .mcform{
+    .page_content{
         flex-direction: column;
+    }
+    .contentBox{
+        margin-top: 30px;
+    }
+}
+@media (min-width:730px) {
+    .contentBox{
+        margin-top: 0;
     }
 }
 @media (min-width:900px) {
-    .mcbox{
-        padding: 20px;
-        padding-bottom: 100px;
+    .main_box{
+        padding: 30px 30px 0 30px;
     }
-    .mcform{
+    .page_content{
         flex-direction: row;
     }
 }
-.acc_formtitle{
-    margin: 25px;
-    font-size: 20px;
+.list_title{
+    margin: 10px 10px 5px 30px;
+    font-size: 16px;
     width: 100%;
-    color: #989898;
+    color: #676767;
+    font-family: Inter, system-ui;
 }
-.acc_top_formtitle{
+
+/** 頁面標題 **/
+.acc_pageTitle{
     font-size: 32px;
     font-weight: 600;
     width: 100%;
@@ -230,20 +251,20 @@ input:focus{
     margin: 10px;
     font-family: Inter, system-ui, sans-serif;
 }
-.acc_top_formtext{
-    margin: 0px;
-    width: 100%;
-    color: #535353;
-}
-.acc_nav_formtext{
-    font-weight: 500;
-    margin: 10px;
-    margin-left: 35px;
+.acc_pageSubTitle{
+    margin: 0;
     width: 100%;
     color: #535353;
 }
 
-.acc_NavBar{
+/** 大螢幕側邊欄設定 **/
+.acc_sideBar_title{
+    font-weight: 500;
+    margin: 10px;
+    width: 100%;
+    color: #535353;
+}
+.acc_sideBar{
     margin-right: 20px;
     padding: 15px;
     padding-right: 25px;
@@ -255,12 +276,12 @@ input:focus{
     left: 0px;
 }
 @media (min-width:100px) {
-    .acc_NavBar{
+    .acc_sideBar{
         display: none;
     }
 }
 @media (min-width:730px) {
-    .acc_NavBar{
+    .acc_sideBar{
         display: flex;
     }
 }
@@ -273,6 +294,8 @@ input:focus{
     color: #757575;
     margin-left: 10px;
 }
+
+/** 側邊欄按鈕設定 **/
 .acc_navbtn{
     margin: 10px;
     margin-top: 0px;
@@ -299,7 +322,9 @@ input:focus{
 .acc_navbtn.active{
     font-weight: 600;
     color: #000;
+    background-color: #efefef;
 }
+/** Phone Nav **/
 .acc_phone_nav{
     position: absolute;
     top: 0;
@@ -334,45 +359,25 @@ input:focus{
     border-bottom: 3px solid #1884f0;
     color: #000;
 }
-.contentbox{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-}
-@media (min-width:100px) {
-    .contentbox{
-        margin-top: 30px;
-    }
-}
-@media (min-width:730px) {
-    .contentbox{
-        margin-top: 0px;
-    }
-}
+
+
+/** 用戶卡片 **/
 .userCard{
-    background-image: linear-gradient(30deg, white, #eeeeeec3);
+    background-image: linear-gradient(120deg, #ffffff, #eeeeeec3);
     display: flex;
     border-radius: 15px;
-    box-shadow: 0px 0px 4px 1px #dededea5;
     margin: 20px;
     align-items: center;
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
     position: relative;
+    border: 1px solid #eeeeeec3;
+    transition: transform 0.2s ease-in-out, background-image 0.2s ease-in-out;
 }
-.userCard::before{
-    content: '';
-    height: 15px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    width: 100%;
-    background-image: linear-gradient(to right, #1666e6, rgb(209, 146, 201));
-    position: absolute;
-    top: 0;
+.userCard:hover{
+    transform: scale(1.01);
+    background-image: linear-gradient(120deg, #ffffff, rgba(220, 220, 220, 0.76));
 }
 
 .userInformation{
@@ -392,6 +397,20 @@ input:focus{
     border-radius: 100px;
     font-weight: 500;
     margin: 0 auto 0 0;
+}
+
+/** 帳號圖片 **/
+.userPhoto{
+    margin: 10px;
+    border-radius: 100px;
+    width: 80px;
+    height: 80px;
+    background-color: #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
 }
 @media (min-width:100px) {
     .userName{
@@ -420,18 +439,40 @@ input:focus{
     }
 }
 /** 基本資料介面 **/
-.list-userIn{
+.mc_ul{
+    list-style: none;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+}
+.mc_ul li{
+    border-bottom: 1px solid #d8d8d8;
+}
+/** 設定list頭尾圓邊框變化 **/
+.mc_ul li:first-child .list-btn{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.mc_ul li:last-child .list-btn{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.mc_ul li:last-child{
+    border-bottom: none;
+}
+
+/** 用戶基本資訊List **/
+/** List li **/
+.mc_list_item{
     width: 100%;
     position: relative;
-    border-top: 1.5px solid #e2e2e2;
-    padding: 15px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
-.lu-title{
+.lu-title{ /** li標題 **/
     font-family: Inter, system-ui;
     font-weight: 500;
     color: #000;
@@ -439,46 +480,45 @@ input:focus{
     font-size: 18px;
     margin-right: auto;
 }
-.lu-fc{
+.lu-fc{ /** li內容 **/
     width: 100%;
     display: flex;
     align-items: center;
 }
-.lu_p{
-    margin: 10px 0 10px 0;
+.lu_p{ /** li內容內的p **/
+    margin: 5px 0 0 0;
     font-family: Inter, system-ui;
     font-weight: 500;
     color: #757575;
     font-size: 14px;
 }
-#list-userIn-name{
-    border: none;
-}
+
+/** 功能按鈕 **/
 .list-btn{
     background-color: transparent;
     border: none;
     width: 100%;
     position: relative;
-    padding: 5px;
-    padding-left: 10px;
+    padding: 15px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 0;
     text-decoration: none;
 }
-.list-btn-line{
-    height: 1.5px;
-    background-color: #ececec;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
+.list-btn.flex-column{
+    flex-direction: column;
 }
 .list-btn:hover{
-    background-color: #f6f6f6;
+    background-color: rgba(221, 221, 221, 0.66);
 }
+.list-btn:disabled:hover{
+    background-color: transparent;
+    cursor: not-allowed;
+}
+
+
 .lb-fc{
     width: 100%;
     display: flex;
@@ -549,27 +589,7 @@ input:focus{
 .updatebtn:hover{
     background-color: #bb1589;
 }
-.acc_alertText{
-    color: #606060;
-    font-family: NotoSansTC;
-    font-weight: 500;
-    font-size: 13px;
-    margin: 0px;
-    margin-right: auto;
-}
-/** 帳號圖片 **/
-.userPhoto{
-    margin: 10px;
-    border-radius: 100px;
-    width: 80px;
-    height: 80px;
-    background-color: #b0caa0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    align-content: center;
-}
+
 .un_ab{
     font-family: Inter, system-ui;
     font-weight: 600;

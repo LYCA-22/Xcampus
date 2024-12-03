@@ -10,7 +10,7 @@ import Index from './pages/Home';
 import Announcement from './pages/announcement';
 import Proposal from './pages/proposal';
 import Login from './pages/Login';
-import Menbercenter  from './pages/Menbercenter';
+import Account  from './pages/Account';
 import OnVote from './pages/onlinevoting';
 import Register from './pages/register';
 import Admin  from "./pages/Admin.jsx";
@@ -239,7 +239,7 @@ function App() {
                 <Route path='/announcement' element={<Announcement />}></Route>
                 <Route path='/proposal' element={<Proposal />}></Route>
                 <Route path='/login' element={<Login />}></Route>
-                <Route path='/account/*' element={<Menbercenter />}></Route>
+                <Route path='/account/*' element={<Account />}></Route>
                 <Route path='/online-voting' element={<OnVote />}></Route>
                 <Route path='/ADregister' element={<Register />}></Route>
                 <Route path='/Admin/*' element={<Admin />}></Route>
