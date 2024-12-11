@@ -74,12 +74,14 @@ const ACHome = () => {
 
     return (
         <>
-            <h1 className="acc_pageTitle" id="mctitle">總覽</h1>
-            <p className="acc_pageSubTitle" id="mctitle">管理你的基本資料</p>
+            <div>
+                <h1 className="acc_pageTitle" id="mctitle">總覽</h1>
+                <p className="acc_pageSubTitle" id="mctitle">管理你的基本資料</p>
+            </div>
             <div className="userCard">
                 <div className="userPhoto">
                     <p className='un_ab'>
-                        {userName && userName.toString().split(' ').length > 1
+                    {userName && userName.toString().split(' ').length > 1
                             ? userName.split(' ')[0][0] + userName.split(' ')[1][0]
                             : userName[0] || ''}
                     </p>

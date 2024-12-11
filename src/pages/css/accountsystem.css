@@ -202,17 +202,17 @@ input:focus{
     flex-direction: column;
     position: relative;
     align-items: center;
-    width: 100%;
     height: 100%;
     overflow: auto;
-    padding: 10px;
+    padding: 20px;
     box-sizing: border-box;
+    flex-grow: 1;
 }
 
 /** 依據視窗大小調整 **/
 @media (min-width:100px) {
     .main_box{
-        padding: 30px 30px 0 30px;
+        padding: 0;
     }
     .page_content{
         flex-direction: column;
@@ -366,7 +366,6 @@ input:focus{
     background-image: linear-gradient(120deg, #ffffff, #eeeeeec3);
     display: flex;
     border-radius: 15px;
-    margin: 20px;
     align-items: center;
     justify-content: center;
     width: 100%;
