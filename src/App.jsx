@@ -240,7 +240,7 @@ function App() {
           background: 'black',
           color: 'white',
           padding: '5px',
-          z-index: 1000,
+          zIndex: 1000,
         }}>
           PWA Mode: {isPWAMode ? 'Yes' : 'No'}
         </div>
