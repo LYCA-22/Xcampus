@@ -227,23 +227,36 @@ function App() {
     )
   };
 
+  const isPWAMode = window.navigator.standalone ||
+      window.matchMedia('(display-mode: standalone)').matches;
+
   return (
     <>
       <Router>
-        <Mobliebar />
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          background: 'black',
+          color: 'white',
+          padding: '5px'
+        }}>
+          PWA Mode: {isPWAMode ? 'Yes' : 'No'}
+        </div>
+        <Mobliebar/>
         <main>
-          <SideBar />
+          <SideBar/>
           <div className='section'>
-              <Routes baseName='/'>
-                <Route path='/' element={<Index />}></Route>
-                <Route path='/announcement' element={<Announcement />}></Route>
-                <Route path='/proposal' element={<Proposal />}></Route>
-                <Route path='/login' element={<Login />}></Route>
-                <Route path='/account/*' element={<Account />}></Route>
-                <Route path='/online-voting' element={<OnVote />}></Route>
-                <Route path='/ADregister' element={<Register />}></Route>
-                <Route path='/Admin/*' element={<Admin />}></Route>
-              </Routes>
+            <Routes baseName='/'>
+              <Route path='/' element={<Index/>}></Route>
+              <Route path='/announcement' element={<Announcement/>}></Route>
+              <Route path='/proposal' element={<Proposal/>}></Route>
+              <Route path='/login' element={<Login/>}></Route>
+              <Route path='/account/*' element={<Account/>}></Route>
+              <Route path='/online-voting' element={<OnVote/>}></Route>
+              <Route path='/ADregister' element={<Register/>}></Route>
+              <Route path='/Admin/*' element={<Admin/>}></Route>
+            </Routes>
           </div>
         </main>
       </Router>
