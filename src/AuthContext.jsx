@@ -23,6 +23,8 @@ export const AuthProvider = ({ children }) => {
             setTimeout(() => {
                 setLoading(false);
             }, 500)
+        } else {
+            window.location.href = 'http://auth.lyhsca.org/login?url=https://beta.xcp.lyhsca.org';
         }
     }, []);
 

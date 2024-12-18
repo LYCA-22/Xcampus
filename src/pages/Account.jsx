@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link, useLocation, BrowserRouter, useNavigate, Navigate } from 'react-router-dom';
-import './css/accountsystem.css'
-import { TextField, Select, MenuItem, FormControl, InputLabel, Menu, Button, styled } from "@mui/material";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Link, useLocation, useNavigate } from 'react-router-dom';
+import './css/accountsystem.css';
+import { TextField, Button } from "@mui/material";
 import { useAuth } from '../AuthContext';
 
 function LoadingBox() {
