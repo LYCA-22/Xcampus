@@ -7,7 +7,11 @@ body{
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
-  height: 100lvh;
+  /* 確保內容從頂部開始 */
+  padding-top: env(safe-area-inset-top);
+  /* 如果需要，設置背景顏色延伸到狀態列 */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 main{
