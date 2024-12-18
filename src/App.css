@@ -11,7 +11,6 @@
   padding-bottom: var(--safe-area-inset-bottom);
   /* 如果使用 box-sizing: border-box */
   min-height: calc(100vh + var(--safe-area-inset-top));
-  background-color: blue; /* 您的背景色 */
   margin: 0;
   font-family: NotoSansTC, system-ui;
 }
@@ -19,7 +18,7 @@
 body{
   margin: 0;
   padding: 0;
-  /** background-color: #f4f4f4; **/
+  background-color: #f4f4f4;
   /* 確保內容從頂部開始 */
   padding-top: env(safe-area-inset-top);
   /* 如果需要，設置背景顏色延伸到狀態列 */
@@ -277,7 +276,7 @@ nav.close{
 }
 .section{
   width: 100%;
-  background-color: transparent;
+  background-color: white;
   position: relative;
   overflow: hidden;
 }
