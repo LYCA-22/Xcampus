@@ -239,7 +239,8 @@ function App() {
           right: 0,
           background: 'black',
           color: 'white',
-          padding: '5px'
+          padding: '5px',
+          z-index: 1000,
         }}>
           PWA Mode: {isPWAMode ? 'Yes' : 'No'}
         </div>
