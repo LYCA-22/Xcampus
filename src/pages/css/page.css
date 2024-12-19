@@ -16,7 +16,10 @@ svg.IsinPage{
     color: white;
 }
 
-
+/** Home **/
+.home{
+    background-image: linear-gradient(to bottom, #d6fffe, white);
+}
 /** 進度查詢 **/
 .ftb_title{
     color: #000;

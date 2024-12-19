@@ -7,7 +7,7 @@
   width: 100%;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  padding-top: var(--safe-area-inset-top);
+  padding-top: 0;
   padding-bottom: var(--safe-area-inset-bottom);
   /* 如果使用 box-sizing: border-box */
   min-height: calc(100vh + var(--safe-area-inset-top));
