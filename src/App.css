@@ -25,7 +25,6 @@ body{
 main{
   display: flex;
   height: 100dvh;
-  overflow-y: auto;
 }
 
 /** Main Aria **/
@@ -33,7 +32,7 @@ main{
   flex-grow: 1;
   background-color: white;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
   width: calc(100vw - 300px);
 }
 section{
