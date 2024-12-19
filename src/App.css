@@ -26,8 +26,8 @@ body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
   margin: 0;
-  padding-top: var(--safe-area-inset-top);
-  padding-bottom: var(--safe-area-inset-bottom);
+  padding-top: 0;
+  padding-bottom: 0;
   font-family: NotoSansTC, system-ui;
   /* 確保內容填滿整個容器 */
   display: flex;
