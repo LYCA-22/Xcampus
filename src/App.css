@@ -18,10 +18,10 @@
 body{
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
   /* 如果需要，設置背景顏色延伸到狀態列 */
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  background-color: white;
 }
 
 main{
@@ -30,6 +30,22 @@ main{
   overflow-y: auto;
 }
 
+/** Main Aria **/
+.main-section{
+  flex-grow: 1;
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+  width: calc(100vw - 300px);
+}
+section{
+  overflow: auto;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+/** Display **/
 .displaynone{
   display: none !important;
 }
@@ -101,14 +117,17 @@ button, a{
 .sidebar{
   height: 100%;
   position: relative;
-  padding: 10px;
   box-sizing: border-box;
+  background-color: #f6f6f6;
+  border-right: 1px solid #e8e8e8;
+  will-change: auto;
+  overflow: hidden;
 }
-.logobox{
+.appLogo{
   display: flex;
   align-items: center;
 }
-.logobox p{
+.beta-text{
   font-family: Inter, system-ui;
   font-weight: 500;
   display: block;
@@ -119,54 +138,52 @@ button, a{
   font-size: 14px;
   color: #7a7a7a;
 }
-.applogo{
+.applogo-img{
   margin: 15px;
   height: 40px;
   width: 40px;
 }
-.show{
+.sidebar-show{
   display: block;
   position: relative;
 }
 
-@media (min-width:100px) {
-  .show{
-     display: none;
-   }
+/** 側邊欄收合設定 **/
+.menu-open{
+  width: 250px;
+  transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
- @media (min-width:500px) {
-   .show{
-     display: block;
-   }
+.menu-close{
+  display: flex;
+  flex-direction: column;
+  width: 0px;
+  transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1); /** 自定義動畫 **/
 }
 
-/** 側邊欄收合設定 **/
-nav.open{
-  display: flex;
-  flex-direction: column;
+/** 側邊欄按鈕管理 **/
+.sidebar-btnlist{
+  padding: 0;
+  list-style: none;
+  margin: 0;
   width: 250px;
-  transition: width 0.2s ease-in-out, opacity 0.2s ease-in-out, padding 0.2s ease-in-out, margin 0.2s ease-in-out;
-}
-nav.close{
-  display: flex;
-  flex-direction: column;
-  width: 70px;
-  transition: width 0.2s ease-in-out, opacity 0.2s ease-in-out, padding 0.2s ease-in-out, margin 0.2s ease-in-out;
 }
 
 /** 側邊欄按鈕 **/
 .sidechangebtn{
-  background-color: transparent;
+  background-color: #f6f6f6;
   border-radius: 100px;
   border: none;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   justify-items: center;
   transition: background-color 0.2s ease-in-out;
   color: #000;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
 }
 .sidechangebtn svg{
     color: #7e7e7e;
@@ -174,11 +191,35 @@ nav.close{
 .sidechangebtn:hover{
   background-color: #ecebeb;
 }
-.sidebar a{
+
+/** 選單按鈕 **/
+.sidebar-btn{
   text-decoration: none;
   display: flex;
+  transition: background-color 0.2s ease-in-out;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 15px;
+  border-radius: 15px;
+  color: #979797;
+  fill: #979797;
+  background-color: transparent;
+  border: none;
 }
-
+.sidebar-btn:hover{
+  background-color: #ececec;
+}
+.libtn-text{
+  margin: 5px;
+  font-family: Inter, system-ui;
+  font-size: 16px;
+  font-weight: 500;
+}
+.sidebar-btn.libtn-active{
+  background-color: white;
+  color: #1c1c1c;
+  fill: #1c1c1c;
+}
 .sidebtn{
   display: flex;
   flex-direction: row;
@@ -187,49 +228,18 @@ nav.close{
   justify-content: center;
   width: 100%;
   margin: 5px;
-  margin-left: 10px;
   padding: 10px;
-  border-radius: 20px;
-  transition: background-color 0.2s ease-in-out;
-  height: 30px;
-  transition: transform 0.2s ease-in-out;
+  border-radius: 15px;
 }
 
-.sidebtn:active{
-  transform: scale(0.95);
-}
-
-.sidebar a:hover .sidebtn, .ft_btn:hover{
-  background-color: #989fa929;
-}
-
-.link_p{
-  margin: 5px;
-  font-family: NotoSansTC;
-  font-weight: 500;
-  margin-right: auto;
-}
-.link_p.hidden{
-  display: none;
-}
-.link_p.theme-dark{
-  background-color: transparent;
-  color: rgb(173, 173, 173);
-}
-.isin{
-  color: #000000;
-  background-color: #ffffff;
-}
-.sbtn{
-  background-color: transparent;
-  color: #7c7c7cbe;
-}
-
-.ftbox{
+/** 側邊欄最下面的容器 **/
+.sidebar-bottom-box{
   margin-top: auto;
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .ftbox_line{
   display: block;
@@ -254,38 +264,6 @@ nav.close{
   border: 0px;
   font-size: 15px;
   color: #7c7c7cbe;
-}
-
-/** section **/
-@media (min-width:100px) {
-  .section{
-    box-shadow: none;
-    border-radius: 0;
-    margin: 0;
-  }
-}
-@media (min-width:500px) {
-  .section{
-    box-shadow: 0 0 5px 2px #ededed;
-    border-radius: 30px 30px 0 0;
-    margin: 15px 15px 0 15px;
-    box-sizing: border-box;
-  }
-}
-.section{
-  width: 100%;
-  background-color: white;
-  position: relative;
-  overflow: hidden;
-}
-.section.theme-dark{
-  background-color: rgb(57, 57, 57);
-}
-
-section{
-  overflow: auto;
-  height: 100%;
-  position: relative;
 }
 
 /** Footer **/
