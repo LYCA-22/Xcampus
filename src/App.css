@@ -8,9 +8,9 @@
   min-height: 100vh;
   min-height: -webkit-fill-available;
   margin: 0;
-  padding: 0;
+  padding-top: 0;
+  padding-bottom: 0;
   font-family: NotoSansTC, system-ui;
-  position: relative;
 }
 
 body{
