@@ -3,23 +3,35 @@
   --safe-area-inset-bottom: env(safe-area-inset-bottom);
 }
 
+/* 確保 html 元素也有正確的高度設置 */
+html {
+  height: 100vh;
+  height: -webkit-fill-available;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  /* 添加這行來處理底部安全區域 */
+  padding-bottom: env(safe-area-inset-bottom);
+  background-color: white;
+  /* 防止內容溢出 */
+  overflow-x: hidden;
+}
+
 #root {
   width: 100%;
   min-height: 100vh;
   min-height: -webkit-fill-available;
   margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: var(--safe-area-inset-top);
+  padding-bottom: var(--safe-area-inset-bottom);
   font-family: NotoSansTC, system-ui;
-}
-
-body{
-  margin: 0;
-  padding: 0;
-  /* 如果需要，設置背景顏色延伸到狀態列 */
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  background-color: white;
+  /* 確保內容填滿整個容器 */
+  display: flex;
+  flex-direction: column;
 }
 
 main{
@@ -32,13 +44,15 @@ main{
   flex-grow: 1;
   background-color: white;
   position: relative;
-  overflow-x: hidden;
   width: calc(100vw - 300px);
+  height: 100%;
 }
 section{
-  overflow: auto;
   position: relative;
   width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
 }
 
 /** Display **/
