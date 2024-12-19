@@ -1,9 +1,8 @@
-:root{
+:root {
   --safe-area-inset-top: env(safe-area-inset-top);
   --safe-area-inset-bottom: env(safe-area-inset-bottom);
 }
 
-/* 確保 html 元素也有正確的高度設置 */
 html {
   height: 100vh;
   height: -webkit-fill-available;
@@ -14,11 +13,13 @@ body {
   padding: 0;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  /* 添加這行來處理底部安全區域 */
-  padding-bottom: 0;
   background-color: white;
-  /* 防止內容溢出 */
   overflow-x: hidden;
+  /* 使用 fixed 定位來防止底部間隙 */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 #root {
@@ -27,11 +28,13 @@ body {
   min-height: -webkit-fill-available;
   margin: 0;
   padding-top: 0;
-  padding-bottom: 0;
+  /* 使用安全區域變數 */
+  padding-bottom: var(--safe-area-inset-bottom);
   font-family: NotoSansTC, system-ui;
-  /* 確保內容填滿整個容器 */
   display: flex;
   flex-direction: column;
+  /* 確保內容不會超出視窗 */
+  position: relative;
 }
 
 main{
