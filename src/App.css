@@ -1,45 +1,31 @@
+/* 在全域 CSS 中 */
 :root {
+  /* 確保整個應用程式知道安全區域的大小 */
   --safe-area-inset-top: env(safe-area-inset-top);
   --safe-area-inset-bottom: env(safe-area-inset-bottom);
-}
-
-html {
-  height: 100vh;
-  height: -webkit-fill-available;
 }
 
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  background-color: white;
-  overflow-x: hidden;
-  /* 使用 fixed 定位來防止底部間隙 */
-  position: fixed;
   width: 100%;
-  top: 0;
-  left: 0;
+  height: 100vh;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  margin: 0;
   padding-top: 0;
-  /* 使用安全區域變數 */
-  padding-bottom: var(--safe-area-inset-bottom);
-  font-family: NotoSansTC, system-ui;
-  display: flex;
-  flex-direction: column;
-  /* 確保內容不會超出視窗 */
-  position: relative;
+  padding-bottom: 0;
+  box-sizing: border-box;  /* 確保包含 padding 和 border */
+  margin: 0;  /* 確保沒有外邊距影響 */
 }
 
 main{
   display: flex;
   height: 100dvh;
+  overflow: hidden;
 }
 
 /** Main Aria **/
@@ -74,12 +60,11 @@ button, a{
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.825);
+  background-color: rgb(255, 255, 255);
   border-top: 1px solid #efefef;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
   z-index: 100;
-  padding: 5px 10px env(safe-area-inset-bottom) 10px;
+  padding: 5px 10px 0 10px;
+  padding-bottom: env(safe-area-inset-bottom);
   box-sizing: border-box;
 }
 /** 為螢幕大小調整 **/
