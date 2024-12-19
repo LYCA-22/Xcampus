@@ -7,11 +7,9 @@
   width: 100%;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  padding-top: 0;
-  padding-bottom: 0;
-  min-height: calc(100vh + var(--safe-area-inset-top));
   margin: 0;
   font-family: NotoSansTC, system-ui;
+  position: relative;
 }
 
 body{
@@ -25,8 +23,7 @@ body{
 
 main{
   display: flex;
-  height: 100lvh;
-  overflow-y: auto;
+  height: 100dvh;
 }
 
 /** Main Aria **/
@@ -39,7 +36,6 @@ main{
 }
 section{
   overflow: auto;
-  height: 100%;
   position: relative;
   width: 100%;
 }
