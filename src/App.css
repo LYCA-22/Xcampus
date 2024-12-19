@@ -8,6 +8,7 @@
   min-height: 100vh;
   min-height: -webkit-fill-available;
   margin: 0;
+  padding: 0;
   font-family: NotoSansTC, system-ui;
   position: relative;
 }
@@ -24,6 +25,7 @@ body{
 main{
   display: flex;
   height: 100dvh;
+  overflow-y: auto;
 }
 
 /** Main Aria **/
