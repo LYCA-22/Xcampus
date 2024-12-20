@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-import { register } from './serviceWorkerRegistration';
 import logo from './pages/assets/logo.png'
 import { useAuth } from './AuthContext';
+import { registerSW } from 'virtual:pwa-register'
 
 /* 頁面 */
 import Index from './pages/Home';
@@ -193,7 +193,19 @@ function App() {
 
   useEffect(() => {
     CheckUser();
-    register();
+
+    const updateSW = registerSW({
+      onNeedRefresh() {
+        // 當有新版本時的處理
+        if (confirm('有新版本可用，是否更新？')) {
+          updateSW()
+        }
+      },
+      onOfflineReady() {
+        // 離線功能準備就緒時的處理
+        console.log('App ready to work offline')
+      },
+    })
   }, []);
 
   const Footer = () => {
