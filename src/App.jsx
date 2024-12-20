@@ -197,9 +197,7 @@ function App() {
     const updateSW = registerSW({
       onNeedRefresh() {
         // 當有新版本時的處理
-        if (confirm('有新版本可用，是否更新？')) {
-          updateSW()
-        }
+        updateSW()
       },
       onOfflineReady() {
         // 離線功能準備就緒時的處理
