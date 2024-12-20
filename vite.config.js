@@ -36,10 +36,23 @@ export default defineConfig({
         "background_color": "#ffffff"
       },
       workbox: {
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 設置為 6MB
         globPatterns: [
-          '**/*.{js,jsx,css,html,ico,png,svg,jpg,jpeg,json,woff,woff2,ttf,eot}',
+          '**/*.{js,jsx,css,html,ico,png,svg,jpg,jpeg,json}',
           'assets/**'
-        ]
+        ],
+        // 針對大型字體檔案的特殊快取策略
+        runtimeCaching: [{
+          urlPattern: /\.(?:woff2?|ttf|eot)$/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'font-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 30 * 24 * 60 * 60 // 30 天
+            }
+          }
+        }]
       }
     })
   ],
