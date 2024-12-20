@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {useNavigate, Navigate, Link} from 'react-router-dom';
 import './css/page.css'
-import { app, getAuth, onAuthStateChanged, getDoc, store, doc, signInWithCustomToken } from "./firebase";
 import { useAuth } from '../AuthContext';
 
 function Index() {
@@ -9,7 +8,18 @@ function Index() {
 
     return (
         <section className='home'>
-            {userName ? <h1 className="sitetitle" >歡迎, {userName}</h1> : <h1 className="sitetitle" >載入資料中</h1>}
+            <div>
+                <h1 className="sitetitle" id='home-site-title'>{!user ? '歡迎使用' : `Hey,${userName}`}</h1>
+                {!navigator.onLine && <h2>目前無網際網路連線</h2>}
+                {!user && <Link to='/login'>立刻登入</Link>}
+            </div>
+            <div>
+                <h3>常用功能</h3>
+                <ul>
+                    <li>成績系統</li>
+                    <li>Ailead</li>
+                </ul>
+            </div>
         </section>
     );
 };

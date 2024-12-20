@@ -20,6 +20,13 @@ svg.IsinPage{
 .home{
     background-image: linear-gradient(to bottom, #d6fffe, white);
 }
+.sitetitle{
+    margin: calc(env(safe-area-inset-top) + 15px) 30px 10px 30px;
+}
+#home-site-title{
+    font-size: 35px;
+    color: #1b1b1b;
+}
 /** 進度查詢 **/
 .ftb_title{
     color: #000;
