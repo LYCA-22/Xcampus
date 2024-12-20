@@ -13,7 +13,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true  // 開發環境啟用 service worker
+        enabled: true
       },
       manifest: {
         "short_name": "LYHS+",
@@ -36,7 +36,10 @@ export default defineConfig({
         "background_color": "#ffffff"
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+        globPatterns: [
+          '**/*.{js,jsx,css,html,ico,png,svg,jpg,jpeg,json,woff,woff2,ttf,eot}',
+          'assets/**'
+        ]
       }
     })
   ],
