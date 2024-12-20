@@ -59,6 +59,7 @@ export const AuthProvider = ({ children }) => {
             setUserRole(data.user_role);
             setUserLevel(data.user_level);
         } else {
+            console.log('無法登入')
             document.cookie = `token=; path=/; domain=lyhsca.org`;
             setUser(false);
             setUserName('');
