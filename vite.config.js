@@ -17,6 +17,8 @@ export default defineConfig({
       manifest: {
         short_name: 'LYHS+',
         name: 'LYHS+',
+        orientation: "portrait",
+        orientation_lock: "portrait",
         icons: [
           {
             src: '/applogo.png',

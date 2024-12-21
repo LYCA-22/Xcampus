@@ -193,6 +193,12 @@ function App() {
 
   useEffect(() => {
     CheckUser();
+
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('portrait').catch((err) => {
+        console.error('锁定屏幕方向失败:', err);
+      });
+    }
   }, []);
 
   const Footer = () => {

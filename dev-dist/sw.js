@@ -67,7 +67,7 @@ if (!self.define) {
     });
   };
 }
-define(['./workbox-07658ed7'], (function (workbox) { 'use strict';
+define(['./workbox-95dee3cf'], (function (workbox) { 'use strict';
 
   self.skipWaiting();
   workbox.clientsClaim();
@@ -79,17 +79,33 @@ define(['./workbox-07658ed7'], (function (workbox) { 'use strict';
    */
   workbox.precacheAndRoute([{
     "url": "index.html",
-    "revision": "0.nvhopefp7jg"
+    "revision": "0.bnqkla797t"
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
     allowlist: [/^\/$/]
   }));
-  workbox.registerRoute(/\.(?:woff2?|ttf|eot)$/i, new workbox.CacheFirst({
+  workbox.registerRoute(/.*\.(?:js|css|html|png|jpg|jpeg|svg|ico|json)$/, new workbox.CacheFirst({
+    "cacheName": "static-resources",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 50,
+      maxAgeSeconds: 2592000
+    })]
+  }), 'GET');
+  workbox.registerRoute(/.*\.(?:woff2?|ttf|eot)$/, new workbox.CacheFirst({
     "cacheName": "font-cache",
     plugins: [new workbox.ExpirationPlugin({
       maxEntries: 10,
       maxAgeSeconds: 2592000
+    })]
+  }), 'GET');
+  workbox.registerRoute(({
+    url
+  }) => url.origin !== self.location.origin, new workbox.NetworkFirst({
+    "cacheName": "external-resources",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 30,
+      maxAgeSeconds: 604800
     })]
   }), 'GET');
 
