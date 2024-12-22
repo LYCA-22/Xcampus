@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const PdfViewer = ({
-                       pdfUrl = './assets/school.pdf',
+                       pdfUrl = './school.pdf',
                        fileName = 'document.pdf',
                        clientId = 'd5f3385b39874babac9b20f09b9b637c',
                        height = '600px'
