@@ -9,11 +9,11 @@
     "dev:stable": "vite",
     "prebuild": "node scripts/update-ver.js",
     "build:prod": "vite build",
-    "build": "npm run prebuild && npm run build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "build:beta": "vite build --mode beta"
+    "build:beta": "npm run prebuild && vite build --mode beta"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
