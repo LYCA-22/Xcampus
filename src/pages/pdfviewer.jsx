@@ -7,7 +7,7 @@ const PdfViewer = () => {
 
     useEffect(() => {
         const adobeDCView = new window.AdobeDC.View({
-            clientId: '1c6b0143f73c4cd18083dea7175435bd', // 替换为您的 API Key
+            clientId: 'd5f3385b39874babac9b20f09b9b637c', // 替换为您的 API Key
             divId: 'adobe-dc-view',
         });
 
