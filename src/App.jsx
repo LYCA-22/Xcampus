@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import logo from './pages/assets/logo.png'
 import { useAuth } from './AuthContext';
-import { registerSW } from 'virtual:pwa-register'
 
 /* 頁面 */
 import Index from './pages/Home';
@@ -13,6 +12,7 @@ import Account  from './pages/Account';
 import OnVote from './pages/onlinevoting';
 import Register from './pages/register';
 import Admin  from "./pages/Admin.jsx";
+import PdfViewer from './pages/pdfviewer';
 
 /* icon & CSS */
 import { HomeIcon, NewsIcon, ProposalIcon, McIcon } from './icons/Graphic control'
@@ -232,6 +232,7 @@ function App() {
               <Route path='/online-voting' element={<OnVote/>}></Route>
               <Route path='/ADregister' element={<Register/>}></Route>
               <Route path='/Admin/*' element={<Admin/>}></Route>
+              <Route path='/pdfViewer' element={<PdfViewer/>}></Route>
             </Routes>
           </div>
         </main>
