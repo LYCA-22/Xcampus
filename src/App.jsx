@@ -193,7 +193,8 @@ function App() {
     }
   }
   useEffect(() => {
-    CheckUser();  // 呼叫你的 CheckUser 函數，假設這是處理用戶驗證的邏輯
+    CheckUser();
+    console.log(`App Version Build Time: ${import.meta.env.VITE_BUILD_TIME}`);
 
     // 註冊 Service Worker
     const updateSW = registerSW({
