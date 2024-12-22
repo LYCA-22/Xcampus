@@ -9,7 +9,7 @@
     "dev:stable": "vite",
     "prebuild": "node scripts/update-ver.js",
     "build:prod": "vite build",
-    "build": "npm run update-version && npm run build",
+    "build": "npm run prebuild && npm run build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
