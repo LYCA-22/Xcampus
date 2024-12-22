@@ -5,7 +5,7 @@
   "version": "1.0.5",
   "type": "module",
   "scripts": {
-    "dev:beta": "vite --mode beta --host",
+    "dev:beta": "vite --mode beta",
     "dev:stable": "vite",
     "build": "vite build",
     "lint": "eslint .",

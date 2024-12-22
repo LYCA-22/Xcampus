@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from 'react';
 
 const PdfViewer = () => {
     const adobeRef = useRef(null);
-    const queryParams = new URLSearchParams(window.location.search);
-    const pdfUrl = queryParams.get('pdfUrl'); // 獲取 name 的值
 
     useEffect(() => {
         const adobeDCView = new window.AdobeDC.View({
@@ -11,29 +9,33 @@ const PdfViewer = () => {
             divId: 'adobe-dc-view',
         });
 
+        // 预览文件
         adobeDCView.previewFile(
             {
                 content: {
                     location: {
-                        url: pdfUrl, // PDF 文件的 URL
+                        url: './assets/school.pdf', // PDF 文件的 URL，指向静态资源
                     },
                 },
                 metaData: {
-                    fileName: 'Sample.pdf', // 文件名
+                    fileName: '113.pdf', // 根据 URL 获取文件名
                 },
             },
             {
-                embedMode: 'SIZED_CONTAINER', // 嵌入模式：如 SIZED_CONTAINER、IN_LINE、FULL_WINDOW
+                embedMode: 'SIZED_CONTAINER', // 嵌入模式：SIZED_CONTAINER、IN_LINE、FULL_WINDOW
             }
         );
-    }, [pdfUrl]);
+
+    }, []); // 当 pdfUrl 变化时重新执行
 
     return (
-        <div
-            id="adobe-dc-view"
-            ref={adobeRef}
-            style={{ width: '100%', height: '500px' }}
-        ></div>
+        <div>
+            <div
+                id="adobe-dc-view"
+                ref={adobeRef}
+                style={{ width: '100%', height: '600px' }}
+            ></div>
+        </div>
     );
 };
 

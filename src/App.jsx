@@ -17,6 +17,7 @@ import PdfViewer from './pages/pdfviewer';
 /* icon & CSS */
 import { HomeIcon, NewsIcon, ProposalIcon, McIcon } from './icons/Graphic control'
 import './App.css';
+import {registerSW} from "virtual:pwa-register";
 
 //側邊欄
 function SideBar(){
@@ -190,16 +191,44 @@ function App() {
       console.log('載入中')
     }
   }
-
   useEffect(() => {
-    CheckUser();
+    CheckUser();  // 呼叫你的 CheckUser 函數，假設這是處理用戶驗證的邏輯
+    if ('serviceWorker' in navigator) {
+      console.log('Service Worker is supported');
+    } else {
+      console.log('Service Worker is not supported');
+    }
 
-    if (screen.orientation && screen.orientation.lock) {
-      screen.orientation.lock('portrait').catch((err) => {
-        console.error('锁定屏幕方向失败:', err);
+    // 註冊 Service Worker
+    const updateSW = registerSW({
+      onNeedRefresh() {
+        console.log('New version available');
+        window.location.reload();  // 強制重新加載頁面以應用新版本
+      },
+      onOfflineReady() {
+        // 離線功能準備就緒時的處理
+        console.log('App ready to work offline');
+      },
+    });
+
+    // 檢查當前的 Service Worker 狀態
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.ready.then((registration) => {
+        if (registration.waiting) {
+          // 如果有待處理的更新（例如等待的 Service Worker）
+          console.log('New version waiting to activate');
+        } else if (registration.installing) {
+          // 如果 Service Worker 正在安裝中
+          console.log('Service Worker is installing...');
+        } else if (registration.active) {
+          // 當前已有激活的 Service Worker
+          console.log('Service Worker is active');
+        } else {
+          console.log('Service Worker not active');
+        }
       });
     }
-  }, []);
+  }, [user, loading]);  // 空陣列，意味著只有在組件掛載時執行一次
 
   const Footer = () => {
     return(
