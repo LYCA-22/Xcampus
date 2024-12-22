@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import logo from './pages/assets/logo.png'
 import { useAuth } from './AuthContext';
+import {version} from "../scripts/version.js";
 
 /* 頁面 */
 import Index from './pages/Home';
@@ -193,42 +194,39 @@ function App() {
   }
   useEffect(() => {
     CheckUser();  // 呼叫你的 CheckUser 函數，假設這是處理用戶驗證的邏輯
-    if ('serviceWorker' in navigator) {
-      console.log('Service Worker is supported');
-    } else {
-      console.log('Service Worker is not supported');
-    }
 
     // 註冊 Service Worker
     const updateSW = registerSW({
       onNeedRefresh() {
-        console.log('New version available');
-        window.location.reload();  // 強制重新加載頁面以應用新版本
+        // 創建更新提示 UI
+        const updatePrompt = document.createElement('div')
+        updatePrompt.className = 'update-prompt'
+        updatePrompt.innerHTML = `
+          <div class="update-content">
+            <h3>新版本可用</h3>
+            <p>當前版本: ${version.number}</p>
+            <p>建置時間: ${version.buildTime}</p>
+            <button id="updateButton">立即更新</button>
+            <button id="laterButton">稍後再說</button>
+          </div>
+        `
+
+        document.body.appendChild(updatePrompt)
+        // 處理更新按鈕點擊
+        document.getElementById('updateButton')?.addEventListener('click', () => {
+          updateSW()
+        })
+        // 處理稍後按鈕點擊
+        document.getElementById('laterButton')?.addEventListener('click', () => {
+          updatePrompt.remove()
+        })
       },
       onOfflineReady() {
-        // 離線功能準備就緒時的處理
-        console.log('App ready to work offline');
-      },
-    });
+        console.log('應用程式已可離線使用')
+      }
+    })
 
-    // 檢查當前的 Service Worker 狀態
-    if (navigator.serviceWorker) {
-      navigator.serviceWorker.ready.then((registration) => {
-        if (registration.waiting) {
-          // 如果有待處理的更新（例如等待的 Service Worker）
-          console.log('New version waiting to activate');
-        } else if (registration.installing) {
-          // 如果 Service Worker 正在安裝中
-          console.log('Service Worker is installing...');
-        } else if (registration.active) {
-          // 當前已有激活的 Service Worker
-          console.log('Service Worker is active');
-        } else {
-          console.log('Service Worker not active');
-        }
-      });
-    }
-  }, [user, loading]);  // 空陣列，意味著只有在組件掛載時執行一次
+  }, []);  // 空陣列，意味著只有在組件掛載時執行一次
 
   const Footer = () => {
     return(
@@ -252,6 +250,7 @@ function App() {
         <main>
           <SideBar/>
           <div className='main-section' aria-label='main-aria'>
+            {version.number}
             <Routes baseName='/'>
               <Route path='/' element={<Index/>}></Route>
               <Route path='/announcement' element={<Announcement/>}></Route>
