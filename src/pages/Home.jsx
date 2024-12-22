@@ -81,7 +81,7 @@ function Index() {
                         </a>
                     </li>
                     <li aria-label='to-ailead-system' className='function-item'>
-                        <a className='function-item-link' href={'https://schoolmgn.kh.edu.tw/upload/336/104_64614/113%E5%AD%B8%E5%B9%B4%E5%BA%A6%E7%AC%AC%E4%B8%80%E5%AD%B8%E6%9C%9F%E8%A1%8C%E4%BA%8B%E6%9B%86.pdf'}>
+                        <Link className='function-item-link' to='/pdfViewer'>
                             <svg width="35" height="35" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg" color='#2ab1ad'>
                                 <path
@@ -90,7 +90,7 @@ function Index() {
                                     strokeLinejoin="round"/>
                             </svg>
                             行事曆
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
