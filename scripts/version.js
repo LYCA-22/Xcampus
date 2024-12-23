@@ -1,9 +1,6 @@
-const Number = import.meta.env.VITE_APP_VERSION
-const BuildTime = import.meta.env.VITE_BUILD_TIME
-const Commit = import.meta.env.VITE_GIT_HASH
-
 export const version = {
-    number: Number || '1.0.0',
-    buildTime: BuildTime || new Date().toISOString(),
-    commit: Commit || 'development'
+    number: import.meta.env.VITE_APP_VERSION || '1.0.0',
+    buildTime: import.meta.env.VITE_BUILD_TIME || new Date().toISOString(),
+    commit: import.meta.env.VITE_GIT_HASH || 'development',
+    mode: import.meta.env.VITE_MODE || 'production'
 };

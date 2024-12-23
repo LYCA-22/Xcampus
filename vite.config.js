@@ -1,6 +1,31 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+import { execSync } from 'child_process'
+import fs from 'fs'
+
+// 取得 Git hash
+const getGitHash = () => {
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim()
+  } catch {
+    return 'unknown'
+  }
+}
+
+// 讀取 package.json
+const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
+
+// 更新環境變數
+const buildTime = new Date().toISOString()
+const gitHash = getGitHash()
+
+// 寫入 .env
+fs.writeFileSync('.env', `
+  VITE_APP_VERSION=${pkg.version}
+  VITE_BUILD_TIME=${buildTime}
+  VITE_GIT_HASH=${gitHash}
+`)
 
 export default defineConfig({
   server: {
@@ -37,6 +62,9 @@ export default defineConfig({
         background_color: '#ffffff',
       },
       workbox: {
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
         maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 設置為 6MB
         globPatterns: [
           '**/*.{js,jsx,css,html,ico,png,svg,jpg,jpeg,json}',
@@ -82,5 +110,8 @@ export default defineConfig({
   ],
   define: {
     'import.meta.env.VITE_IS_BETA': JSON.stringify(process.env.VITE_IS_BETA),
+  },
+  buildBase: {
+    buildId: `${pkg.version}_${gitHash}`
   },
 });

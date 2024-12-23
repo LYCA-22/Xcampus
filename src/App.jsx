@@ -210,7 +210,6 @@ function App() {
             <button id="laterButton">稍後再說</button>
           </div>
         `
-
         document.body.appendChild(updatePrompt)
         // 處理更新按鈕點擊
         document.getElementById('updateButton')?.addEventListener('click', () => {
