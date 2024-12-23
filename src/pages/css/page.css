@@ -68,6 +68,27 @@ svg.IsinPage{
     border-radius: 20px;
     background-color: white;
     display: flex;
+    margin: 5px 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.temp_text{
+    margin: 0;
+    font-size: 60px;
+    font-family: Inter, system-ui;
+}
+.weather-deText{
+    margin: 10px 0 0 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+.location-box{
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.location-text{
+    margin: 10px;
 }
 /** 常用功能 **/
 .home-functionBox{
@@ -104,6 +125,28 @@ svg.IsinPage{
 }
 .function-item-link svg{
     margin: 5px;
+}
+.system-inf-box{
+    margin: 5px 20px;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.system-name{
+    font-size: 26px;
+    font-family: Inter, system-ui;
+    font-weight: bold;
+    margin: 5px 0;
+}
+.ver-text{
+    font-family: Inter, system-ui;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 10px 0;
 }
 /** 進度查詢 **/
 .ftb_title{
