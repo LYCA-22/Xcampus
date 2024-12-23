@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import logo from './pages/assets/logo.png'
 import { useAuth } from './AuthContext';
-import {version} from "../scripts/version.js";
 
 /* 頁面 */
 import Index from './pages/Home';
@@ -250,7 +249,6 @@ function App() {
         <main>
           <SideBar/>
           <div className='main-section' aria-label='main-aria'>
-            {version.number}
             <Routes baseName='/'>
               <Route path='/' element={<Index/>}></Route>
               <Route path='/announcement' element={<Announcement/>}></Route>

@@ -31,7 +31,7 @@ svg.IsinPage{
 }
 /** no-internet **/
 .no-internet-box{
-    margin: 15px 0;
+    margin: 10px 0;
     font-size: 18px;
     background: #ffbfbf;
     color: #b60000;
@@ -63,14 +63,16 @@ svg.IsinPage{
 .home-arrow-to-right{
     margin: 5px;
 }
+/** 天氣資訊 **/
+.school-weather-box{
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+}
 /** 常用功能 **/
 .home-functionBox{
-    margin: 10px 30px;
-    padding: 10px;
-    border-radius: 20px;
-    box-shadow: 0px 2px 5px 0px #e6e6e6;
-    background-color: white;
-    border: 1px solid #ededed;
+    margin: 20px;
+    padding: 0;
 }
 .functionBox-title{
     margin: 10px;
@@ -78,12 +80,11 @@ svg.IsinPage{
 .function-list{
     padding: 0;
     list-style: none;
-    margin: 0 10px;
+    margin: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 .function-item{
-    min-width: 100px;
     display: flex;
     justify-content: center;
 }
@@ -92,8 +93,9 @@ svg.IsinPage{
     flex-direction: column;
     align-items: center;
     margin: 8px;
-    font-weight: 450;
+    font-weight: 500;
     font-size: 14px;
+    font-family: Inter, system-ui;
     text-decoration: none;
     color: #1c1c1c;
     background-color: transparent;

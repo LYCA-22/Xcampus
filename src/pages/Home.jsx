@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {useNavigate, Navigate, Link} from 'react-router-dom';
 import './css/page.css'
 import { useAuth } from '../AuthContext';
+import { version } from "../version.js";
 
 function Index() {
     const { user, userName } = useAuth()
+    const [ error, setError ] = useState(null); // 錯誤信息
+    const [ weatherData, setWeatherData ] = useState(null)
 
     const openIdLogin = () => {
         // 建立一個隱藏表單
@@ -22,6 +25,115 @@ function Index() {
         form.appendChild(input);
         document.body.appendChild(form);
         form.submit();
+    }
+    useEffect(() => {
+        const fetchWeather = async () => {
+            try {
+                setError(null);
+
+                const API_KEY = 'CWA-C2C5DCE1-4A66-4FE8-9918-CA244456227F';
+
+                const response = await fetch(
+                    `https://opendata.cwa.gov.tw/api/v1/rest/datastore/O-A0001-001?Authorization=${API_KEY}&format=JSON&StationName=%E6%9E%97%E5%9C%92`
+                );
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                const weatherElement = data?.records?.Station?.[0]?.WeatherElement;
+                console.log('WeatherElement:', weatherElement);
+
+                let weatherData = {};
+
+                if (Array.isArray(weatherElement)) {
+                    weatherData = weatherElement.reduce((acc, el) => {
+                        acc[el.elementName] = el.elementValue;
+                        return acc;
+                    }, {});
+                } else if (typeof weatherElement === 'object' && weatherElement !== null) {
+                    weatherData = weatherElement;
+                }
+
+                setWeatherData(weatherData);
+
+            } catch (err) {
+                console.error('Error details:', err);
+                setError(err.message || "无法获取天气信息");
+            }
+        };
+
+        fetchWeather();
+    }, []);
+
+    const weatherIcon = (weatherText, scale) => {
+        const Icons = {
+            '小雨':
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width={scale} height={scale}
+                     viewBox="0 0 48 48">
+                    <linearGradient id="y7r6QEOa60m6zB~6MEX5za_kKxyuLXD4w0n_gr1" x1="21.313" x2="25.618" y1="6.079"
+                                    y2="31.448" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stopColor="#fcfcfc"></stop>
+                        <stop offset="1" stopColor="#c3c9cd"></stop>
+                    </linearGradient>
+                    <path fill="url(#y7r6QEOa60m6zB~6MEX5za_kKxyuLXD4w0n_gr1)"
+                          d="M34,11c-0.331,0-0.657,0.018-0.98,0.049C30.741,7.99,27.108,6,23,6	c-5.713,0-10.52,3.837-12.012,9.071C7.049,15.569,4,18.925,4,23c0,4.418,3.582,8,8,8c1.818,0,20.107,0,22,0c5.523,0,10-4.477,10-10	C44,15.477,39.523,11,34,11z"></path>
+                    <path fill="#199be2"
+                          d="M32.414,40.414c-0.781,0.781-2.047,0.781-2.828,0c-0.781-0.781-0.781-2.047,0-2.828	C30.367,36.805,34,36,34,36S33.195,39.633,32.414,40.414z"></path>
+                    <path fill="#199be2"
+                          d="M15.414,38.414c-0.781,0.781-2.047,0.781-2.828,0c-0.781-0.781-0.781-2.047,0-2.828	C13.367,34.805,17,34,17,34S16.195,37.633,15.414,38.414z"></path>
+                    <path fill="#199be2"
+                          d="M22.414,46.414c-0.781,0.781-2.047,0.781-2.828,0c-0.781-0.781-0.781-2.047,0-2.828	C20.367,42.805,24,42,24,42S23.195,45.633,22.414,46.414z"></path>
+                </svg>
+            ,
+            '细雨':
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width={scale} height={scale} viewBox="0 0 48 48">
+                    <linearGradient id="iVi~tMQSpFuKTZqQ8ghpQa_QZJFPE7TNi5Q_gr1" x1="21.313" x2="25.618" y1="6.079"
+                                    y2="31.448" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stopColor="#fcfcfc"></stop>
+                        <stop offset="1" stopColor="#c3c9cd"></stop>
+                    </linearGradient>
+                    <path fill="url(#iVi~tMQSpFuKTZqQ8ghpQa_QZJFPE7TNi5Q_gr1)"
+                          d="M34,11c-0.331,0-0.657,0.018-0.98,0.049C30.741,7.99,27.108,6,23,6	c-5.713,0-10.52,3.837-12.012,9.071C7.049,15.569,4,18.925,4,23c0,4.418,3.582,8,8,8c1.818,0,20.107,0,22,0c5.523,0,10-4.477,10-10	C44,15.477,39.523,11,34,11z"></path>
+                    <linearGradient id="iVi~tMQSpFuKTZqQ8ghpQb_QZJFPE7TNi5Q_gr2" x1="27.069" x2="27.721" y1="33.551"
+                                    y2="38.051" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stopColor="#2aa4f4"></stop>
+                        <stop offset=".595" stopColor="#0f80e3"></stop>
+                        <stop offset="1" stopColor="#006dd9"></stop>
+                    </linearGradient>
+                    <path fill="url(#iVi~tMQSpFuKTZqQ8ghpQb_QZJFPE7TNi5Q_gr2)"
+                          d="M29,36.5c0,0.828-0.672,1.5-1.5,1.5S26,37.328,26,36.5c0-0.681,1.015-2.353,1.375-2.925	c0.058-0.093,0.191-0.093,0.25,0C27.985,34.147,29,35.819,29,36.5z"></path>
+                    <linearGradient id="iVi~tMQSpFuKTZqQ8ghpQc_QZJFPE7TNi5Q_gr3" x1="25.712" x2="26.148" y1="41.034"
+                                    y2="44.034" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stopColor="#2aa4f4"></stop>
+                        <stop offset=".595" stopColor="#0f80e3"></stop>
+                        <stop offset="1" stopColor="#006dd9"></stop>
+                    </linearGradient>
+                    <path fill="url(#iVi~tMQSpFuKTZqQ8ghpQc_QZJFPE7TNi5Q_gr3)"
+                          d="M27,43c0,0.552-0.448,1-1,1s-1-0.448-1-1c0-0.454,0.677-1.569,0.917-1.95	c0.039-0.062,0.128-0.062,0.166,0C26.323,41.431,27,42.546,27,43z"></path>
+                    <linearGradient id="iVi~tMQSpFuKTZqQ8ghpQd_QZJFPE7TNi5Q_gr4" x1="20.712" x2="21.148" y1="34.034"
+                                    y2="37.034" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stopColor="#2aa4f4"></stop>
+                        <stop offset=".595" stopColor="#0f80e3"></stop>
+                        <stop offset="1" stopColor="#006dd9"></stop>
+                    </linearGradient>
+                    <path fill="url(#iVi~tMQSpFuKTZqQ8ghpQd_QZJFPE7TNi5Q_gr4)"
+                          d="M22,36c0,0.552-0.448,1-1,1s-1-0.448-1-1c0-0.454,0.677-1.569,0.917-1.95	c0.039-0.062,0.128-0.062,0.166,0C21.323,34.431,22,35.546,22,36z"></path>
+                    <linearGradient id="iVi~tMQSpFuKTZqQ8ghpQe_QZJFPE7TNi5Q_gr5" x1="19.069" x2="19.721" y1="40.551"
+                                    y2="45.051" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stopColor="#2aa4f4"></stop>
+                        <stop offset=".595" stopColor="#0f80e3"></stop>
+                        <stop offset="1" stopColor="#006dd9"></stop>
+                    </linearGradient>
+                    <path fill="url(#iVi~tMQSpFuKTZqQ8ghpQe_QZJFPE7TNi5Q_gr5)"
+                          d="M21,43.5c0,0.828-0.672,1.5-1.5,1.5S18,44.328,18,43.5c0-0.681,1.015-2.353,1.375-2.925	c0.058-0.093,0.191-0.093,0.25,0C19.985,41.147,21,42.819,21,43.5z"></path>
+                </svg>
+        }
+
+        return (
+            Icons[weatherText]
+        )
     }
 
     return (
@@ -51,6 +163,14 @@ function Index() {
                             <p className='no-internet-subtitle'>失去網路，部分功能將無法使用</p>
                         </div>
                     </div>
+                }
+            </div>
+            <div className='school-weather-box'>
+                {weatherData &&
+                    <>
+                        <h1>{weatherData.AirTemperature}°C</h1>
+                        <p>{weatherData.Weather}</p>
+                    </>
                 }
             </div>
             <div className='home-functionBox'>
@@ -92,8 +212,21 @@ function Index() {
                             行事曆
                         </Link>
                     </li>
+                    <li aria-label='to-ailead-system' className='function-item'>
+                        <Link className='function-item-link'>
+                            <svg width="35" height="35" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg" color='#2ab1ad'>
+                                <path
+                                    d="M22.7 11.5L20.7005 13.5L18.7 11.5M20.9451 13C20.9814 12.6717 21 12.338 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C14.8273 21 17.35 19.6963 19 17.6573M12 7V12L15 14"
+                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                    strokeLinejoin="round"/>
+                            </svg>
+                            段考考程
+                        </Link>
+                    </li>
                 </ul>
             </div>
+            {version.number}
         </section>
     );
 };
