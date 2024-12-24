@@ -42,8 +42,4 @@ const CheckAuth = () => {
     }, [auth, currentPath, navigate]);
 };
 
-
-
-
-// 導出需要的 Firebase 實例
 export { app, analytics, auth, getAuth, onAuthStateChanged, storage, ref, uploadBytesResumable, getDownloadURL, updateProfile, signOut, CheckAuth, collection, addDoc, getDoc, store, doc, updateDoc, setDoc, getDocs, serverTimestamp, createUserWithEmailAndPassword, updatePassword, reauthenticateWithCredential, EmailAuthProvider, signInWithCustomToken };

@@ -6,6 +6,7 @@ import Logo from './assets/logo-icon-text.svg'
 
 function Intro(){
     const {user} = useAuth();
+    const navigate = useNavigate();
     useEffect(() => {
         if (user) {
             navigate('/');
