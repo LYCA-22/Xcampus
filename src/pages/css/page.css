@@ -17,6 +17,37 @@ svg.IsinPage{
     color: white;
 }
 
+/** intro **/
+.intro{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.intro-logo{
+    height: 100px;
+}
+.intro-text{
+    position: absolute;
+    bottom: 50px;
+}
+.intro-btn{
+    padding: 10px 30px;
+    background-color: #1c1c1c;
+    color: white;
+    text-decoration: none;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.intro-btn:hover{
+    background-color: #474747;
+}
+
 /** Home **/
 .home{
     background-image: linear-gradient(to bottom, #d6fffe, white);

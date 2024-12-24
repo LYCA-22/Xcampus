@@ -13,6 +13,7 @@ import OnVote from './pages/onlinevoting';
 import Register from './pages/register';
 import Admin  from "./pages/Admin.jsx";
 import PdfViewer from './pages/pdfviewer';
+import Intro from "./pages/Intro.jsx";
 
 /* icon & CSS */
 import { HomeIcon, NewsIcon, ProposalIcon, McIcon } from './icons/Graphic control'
@@ -243,11 +244,24 @@ function App() {
   const isPWAMode = window.navigator.standalone ||
       window.matchMedia('(display-mode: standalone)').matches;
 
+  const Sidebar_control = () => {
+    const location = useLocation();
+    const currentPath = location.pathname;
+    if (currentPath != '/home'){
+      return (
+          <>
+              <SideBar/>
+              <Mobliebar/>
+          </>
+      )
+    }
+  }
+
   return (
     <>
       <Router>
         <main>
-          <SideBar/>
+          <Sidebar_control />
           <div className='main-section' aria-label='main-aria'>
             <Routes baseName='/'>
               <Route path='/' element={<Index/>}></Route>
@@ -259,10 +273,10 @@ function App() {
               <Route path='/ADregister' element={<Register/>}></Route>
               <Route path='/Admin/*' element={<Admin/>}></Route>
               <Route path='/pdfViewer' element={<PdfViewer/>}></Route>
+              <Route path='/home' element={<Intro />}></Route>
             </Routes>
           </div>
         </main>
-        <Mobliebar/>
       </Router>
     </>
   )
