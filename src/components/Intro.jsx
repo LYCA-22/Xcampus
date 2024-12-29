@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import {useNavigate, Navigate, Link} from 'react-router-dom';
-import './css/page.css'
-import { useAuth } from '../AuthContext';
-import Logo from './assets/logo-icon-text.svg'
+import { useEffect } from 'react';
+import {useNavigate, Link} from 'react-router-dom';
+import '../css/page.css'
+import { useAuth } from '../services/AuthContext.jsx';
+import Logo from '../assets/logo-icon-text.svg'
 
 function Intro(){
     const {user} = useAuth();

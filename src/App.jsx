@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-import logo from './pages/assets/logo.png'
-import { useAuth } from './AuthContext';
+import logo from './assets/logo.png'
+import { useAuth } from './services/AuthContext.jsx';
 
 /* 頁面 */
-import Index from './pages/Home';
-import Announcement from './pages/announcement';
-import Proposal from './pages/proposal';
-import Login from './pages/Login';
-import Account  from './pages/Account';
-import OnVote from './pages/onlinevoting';
-import Register from './pages/register';
-import Admin  from "./pages/Admin.jsx";
-import PdfViewer from './pages/pdfviewer';
-import Intro from "./pages/Intro.jsx";
+import Index from './components/Home';
+import Announcement from './components/announcement';
+import Proposal from './components/proposal';
+import Login from './components/Login';
+import Account  from './components/Account';
+import OnVote from './components/onlinevoting';
+import Register from './components/register';
+import Admin  from "./components/Admin.jsx";
+import PdfViewer from './components/pdfviewer';
+import Intro from "./components/Intro.jsx";
 
 /* icon & CSS */
-import { HomeIcon, NewsIcon, ProposalIcon, McIcon } from './icons/Graphic control'
+import { HomeIcon, NewsIcon, ProposalIcon, McIcon } from './components/Graphic control.jsx'
 import './App.css';
 import {registerSW} from "virtual:pwa-register";
 
@@ -247,7 +247,7 @@ function App() {
   const Sidebar_control = () => {
     const location = useLocation();
     const currentPath = location.pathname;
-    if (currentPath != '/home'){
+    if (currentPath != '/home' && currentPath != '/login'){
       return (
           <>
               <SideBar/>

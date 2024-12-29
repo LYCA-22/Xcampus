@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './css/page.css'
+import '../css/page.css'
 import { collection, getDocs, store } from './firebase'
 import { useLocation } from 'react-router-dom';
 

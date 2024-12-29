@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import './css/page.css'
+import '../css/page.css'
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { TextField, Select, MenuItem, FormControl, InputLabel, Menu, Button, styled, Switch } from "@mui/material";
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../services/AuthContext.jsx';
 
 function Register() {
     const {userLevel} = useAuth()

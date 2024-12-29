@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Navigate } from 'react-router-dom';
-import './css/ov.css'
+import '../css/ov.css'
 import { app } from "./firebase";
 
 

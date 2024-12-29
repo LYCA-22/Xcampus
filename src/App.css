@@ -1,5 +1,25 @@
 /* 在全域 CSS 中 */
 :root {
+  background-color: rgb(251, 251, 251);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  -webkit-tap-highlight-color: rgb(0, 0, 0, 0);
+}
+
+html, body{
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: NotoSansTC;
+  src: url(./Fonts/Noto_Sans_TC/NotoSansTC-VariableFont_wght.woff2)format('woff2');
+  font-display: normal;
+}
+
+:root {
   /* 確保整個應用程式知道安全區域的大小 */
   --safe-area-inset-top: env(safe-area-inset-top);
   --safe-area-inset-bottom: env(safe-area-inset-bottom);

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import './css/page.css'
-import './css/admin.css'
-import { useAuth } from '../AuthContext';
+import '../css/page.css'
+import '../css/admin.css'
+import { useAuth } from '../services/AuthContext.jsx';
 import {Link} from "react-router-dom";
 
 function Admin() {

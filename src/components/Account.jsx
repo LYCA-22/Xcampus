@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Link, useLocation, useNavigate } from 'react-router-dom';
-import './css/accountsystem.css';
+import '../css/accountsystem.css';
 import { TextField, Button } from "@mui/material";
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../services/AuthContext.jsx';
 
 function LoadingBox() {
     return (
