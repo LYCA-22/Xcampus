@@ -32,7 +32,7 @@ export const apiService = {
     async getUserData(sessionId){
         try {
             const response = await fetch(`${API_BASE_URL}/veritySession?sessionId=${sessionId}`, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
