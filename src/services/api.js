@@ -53,23 +53,28 @@ export const apiService = {
     },
     async getNews() {
         try {
-            // 從 Worker 端點獲取數據
             const response = await fetch(`${API_BASE_URL}/getAD`, {
                 method: 'GET',
             });
 
             if (response.ok) {
-                const data = await response.text(); // 獲取響應的文本內容（HTML）
-                // 找到顯示內容的元素
+                // 获取响应的 HTML 内容
+                const data = await response.text();// 获取HTML内容（字符串）
+
+                // 获取要插入的 DOM 元素
                 const contentElement = document.getElementById('announcement-content');
-                // 將 HTML 內容插入到頁面中
-                contentElement.innerHTML = data;
+                if (contentElement) {
+                    // 使用 innerHTML 将 HTML 内容插入到页面
+                    contentElement.innerHTML = data;
+                } else {
+                    console.error('Element with id "announcement-content" not found');
+                }
             } else {
                 const result = await response.json();
                 throw new Error(result.error);
             }
         } catch (error) {
-            console.error('Error in userLogin:', error);
+            console.error('Error in getNews:', error);
             throw error;
         }
     },

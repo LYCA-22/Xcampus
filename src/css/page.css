@@ -49,9 +49,6 @@ svg.IsinPage{
 }
 
 /** Home **/
-.home{
-    background-image: linear-gradient(to bottom, #d6fffe, white);
-}
 .home-page-top-box{
     padding: calc(env(safe-area-inset-top) + 15px) 30px 10px 30px;
 }
@@ -85,7 +82,7 @@ svg.IsinPage{
 /** 登入引導區域 **/
 .home-loginbtn{
     text-decoration: none;
-    color: #2ab1ad;
+    color: #5a869f;
     font-size: 18px;
     font-weight: bold;
     display: flex;
@@ -95,31 +92,63 @@ svg.IsinPage{
     margin: 5px;
 }
 /** 天氣資訊 **/
+.weather{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    width: 100%;
+    position: relative;
+}
 .school-weather-box{
-    border-radius: 20px;
-    background-color: white;
+    border-radius: 25px 25px 25px 0;
+    background-image: linear-gradient(45deg, white, #c6eaff);
     display: flex;
     margin: 5px 20px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    border: 1px solid #c6eaff;
 }
 .temp_text{
     margin: 0;
     font-size: 60px;
     font-family: Inter, system-ui;
+    margin-top: 10px;
+    color: #2f4653;
 }
 .weather-deText{
     margin: 10px 0 0 0;
     font-size: 18px;
     font-weight: 500;
 }
+.weather-line{
+    width: 100%;
+    height: 1px;
+    background: #bbefff;
+    margin-top: 10px;
+}
 .location-box{
     display: flex;
     align-items: center;
+    justify-content: center;
+    justify-items: center;
     margin: 0;
+    padding: 5px 10px 5px 10px;
+    border-radius: 100px;
+    background: #5a869f;
+    color: white;
+    fill: white;
 }
 .location-text{
-    margin: 10px;
+    margin: 5px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.dataInf{
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size: 12px;
+    opacity: 0.4;
 }
 /** 常用功能 **/
 .home-functionBox{
