@@ -31,11 +31,10 @@ export const apiService = {
     },
     async getUserData(sessionId){
         try {
-            const response = await fetch(`${API_BASE_URL}/veritySession`, {
+            const response = await fetch(`${API_BASE_URL}/veritySession?sessionId=${sessionId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${sessionId}`
                 },
             });
 
