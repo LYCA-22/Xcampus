@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { apiService } from "./api.js";
 
 // 創建 AuthContext
 const AuthContext = createContext();
@@ -17,9 +18,9 @@ export const AuthProvider = ({ children }) => {
     const IsBeta = import.meta.env.VITE_IS_MODE === 'true';
 
     useEffect(() => {
-        const token = getCookie("token"); // 獲取 cookie 中的 token
-        if (token) {
-            fetchUserData(token);
+        const sessionId = getCookie("sessionId"); // 獲取 cookie 中的 token
+        if (sessionId) {
+            fetchUserData(sessionId);
             setTimeout(() => {
                 setLoading(false);
             }, 500)
@@ -37,14 +38,8 @@ export const AuthProvider = ({ children }) => {
     }
 
     async function fetchUserData(token) {
-        const response = await fetch(`https://lycaapis.zhicheng-gong.workers.dev/checkToken?token=${token}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        if (response.ok) {
-            const data = await response.json();
+        const data = await apiService.getUserData(token);
+        if (data) {
             setUser(true);
             setUserName(data.name);
             setUserEmail(data.email);
@@ -60,7 +55,7 @@ export const AuthProvider = ({ children }) => {
             setUserLevel(data.user_level);
         } else {
             console.log('無法登入')
-            document.cookie = `token=; path=/; domain=lyhsca.org`;
+            document.cookie = `sessionId=; path=/; domain=lyhsca.org`;
             setUser(false);
             setUserName('');
             setUserEmail('');
@@ -75,7 +70,7 @@ export const AuthProvider = ({ children }) => {
 
     const logoutUser = () => {
         // 清除 token
-        document.cookie = `token=; path=/; domain=lyhsca.org`;
+        document.cookie = `sessionId=; path=/; domain=lyhsca.org`;
         setUser(false);
         setUserName('');
         setUserEmail('');

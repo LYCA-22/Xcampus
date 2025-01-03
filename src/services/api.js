@@ -10,13 +10,16 @@ export const apiService = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                }),
             });
 
             if (response.ok) {
                 const result = await response.json();
-                const token = result.token;
-                document.cookie = `token=${token}; path=/; domain=lyhsca.org; Secure; SameSite=Strict; max-age=172800`;
+                const sessionId = result.sessionId;
+                document.cookie = `sessionId=${sessionId}; path=/; domain=lyhsca.org; Secure; SameSite=Strict; max-age=172800`;
             } else {
                 const result = await response.json();
                 throw new Error(result.error);
@@ -24,6 +27,28 @@ export const apiService = {
         } catch (error) {
             console.error('Error in userLogin:', error);
             throw error;
+        }
+    },
+    async getUserData(sessionId){
+        try {
+            const response = await fetch(`${API_BASE_URL}/veritySession`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionId}`
+                },
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                return result;
+            } else {
+                const result = await response.json();
+                throw new Error(result.error);
+            }
+        } catch (e) {
+            console.error('Error in getUserData:', e);
+            throw e;
         }
     },
     async getNews() {
