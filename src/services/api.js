@@ -31,10 +31,11 @@ export const apiService = {
     },
     async getUserData(sessionId){
         try {
-            const response = await fetch(`${API_BASE_URL}/veritySession?sessionId=${sessionId}`, {
+            const response = await fetch(`${API_BASE_URL}/veritySession`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionId}`,
                 },
             });
 
@@ -54,7 +55,7 @@ export const apiService = {
         try {
             // 從 Worker 端點獲取數據
             const response = await fetch(`${API_BASE_URL}/getAD`, {
-                method: 'POST',
+                method: 'GET',
             });
 
             if (response.ok) {
